@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
 
 Namespace TokoRotiVB
-    Public Partial Class FrmProduk
+    Partial Public Class FrmProduk
         Public Sub New()
             InitializeComponent()
             UiHelpers.ConfigureGrid(dgvProduk)
@@ -13,9 +13,23 @@ Namespace TokoRotiVB
             AddHandler btnBersihkan.Click, Sub(sender, e) Bersihkan()
             AddHandler dgvProduk.CellClick, Sub(sender, e) PilihBaris()
             AddHandler Me.Load, Sub(sender, e) MuatData()
-            btnUbah.Enabled = AppSession.IsOwner
-            btnHapus.Enabled = AppSession.IsOwner
+
+            ' Replaced the hardcoded Enabled properties with the updater
+            UpdateButtonState()
         End Sub
+
+        ' --- NEW METHOD ADDED ---
+        Private Sub UpdateButtonState()
+            Dim isSelected As Boolean = Not String.IsNullOrWhiteSpace(txtIdProduk.Text)
+
+            ' Disable Tambah if a row is selected
+            btnTambah.Enabled = Not isSelected
+
+            ' Enable Ubah and Hapus if a row is selected AND user is Owner
+            btnUbah.Enabled = isSelected AndAlso AppSession.IsOwner
+            btnHapus.Enabled = isSelected AndAlso AppSession.IsOwner
+        End Sub
+        ' -------------------------
 
         Private Sub MuatData()
             Try
@@ -77,7 +91,7 @@ Namespace TokoRotiVB
             Try
                 Database.Execute("DELETE FROM produk WHERE id_produk=@id", New MySqlParameter("@id", id))
                 MuatData()
-                Bersihkan()
+                Bersihkan() ' This naturally unselects the data and updates the buttons
             Catch ex As Exception
                 UiHelpers.ShowError(ex, "Gagal menghapus produk")
             End Try
@@ -96,6 +110,8 @@ Namespace TokoRotiVB
             numHargaJual.Value = Math.Max(numHargaJual.Minimum, Math.Min(numHargaJual.Maximum, harga))
             numHpp.Value = Math.Max(numHpp.Minimum, Math.Min(numHpp.Maximum, hpp))
             numMasaSimpan.Value = Math.Max(numMasaSimpan.Minimum, Math.Min(numMasaSimpan.Maximum, masa))
+
+            UpdateButtonState() ' <--- ADDED HERE
         End Sub
 
         Private Sub Bersihkan()
@@ -108,6 +124,8 @@ Namespace TokoRotiVB
             numMasaSimpan.Value = 0
             dgvProduk.ClearSelection()
             txtNamaProduk.Focus()
+
+            UpdateButtonState() ' <--- ADDED HERE
         End Sub
 
         Private Sub FrmProduk_Load(sender As Object, e As EventArgs) Handles MyBase.Load
