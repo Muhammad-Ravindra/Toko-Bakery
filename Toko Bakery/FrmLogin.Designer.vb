@@ -49,9 +49,9 @@ Namespace TokoRotiVB
             tlpLogin.AutoSize = True
             tlpLogin.AutoSizeMode = AutoSizeMode.GrowAndShrink
             tlpLogin.ColumnCount = 3
-            tlpLogin.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 10.0F))
-            tlpLogin.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 80.0F))
-            tlpLogin.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 10.0F))
+            tlpLogin.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 10F))
+            tlpLogin.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 80F))
+            tlpLogin.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 10F))
             tlpLogin.Controls.Add(lblJudul, 0, 1)
             tlpLogin.Controls.Add(lblUsername, 1, 3)
             tlpLogin.Controls.Add(txtUsername, 1, 4)
@@ -64,17 +64,17 @@ Namespace TokoRotiVB
             tlpLogin.Margin = New Padding(4)
             tlpLogin.Name = "tlpLogin"
             tlpLogin.RowCount = 11
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 31.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 56.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 75.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 30.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 34.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 28.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 30.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 34.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 35.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 52.0F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 31F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 56F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 75F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 30F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 34F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 28F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 30F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 34F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 35F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 52F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
             tlpLogin.Size = New Size(530, 490)
             tlpLogin.TabIndex = 1
             ' 
@@ -82,7 +82,7 @@ Namespace TokoRotiVB
             ' 
             tlpLogin.SetColumnSpan(lblJudul, 3)
             lblJudul.Dock = DockStyle.Fill
-            lblJudul.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold)
+            lblJudul.Font = New Font("Segoe UI", 20F, FontStyle.Bold)
             lblJudul.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
             lblJudul.Location = New Point(4, 31)
             lblJudul.Margin = New Padding(4, 0, 4, 0)
@@ -95,7 +95,7 @@ Namespace TokoRotiVB
             ' lblUsername
             ' 
             lblUsername.Dock = DockStyle.Fill
-            lblUsername.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+            lblUsername.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
             lblUsername.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
             lblUsername.Location = New Point(57, 162)
             lblUsername.Margin = New Padding(4, 0, 4, 0)
@@ -117,7 +117,7 @@ Namespace TokoRotiVB
             ' lblPassword
             ' 
             lblPassword.Dock = DockStyle.Fill
-            lblPassword.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+            lblPassword.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
             lblPassword.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
             lblPassword.Location = New Point(57, 254)
             lblPassword.Margin = New Padding(4, 0, 4, 0)
@@ -140,7 +140,7 @@ Namespace TokoRotiVB
             ' chkLoginOwner
             ' 
             chkLoginOwner.Dock = DockStyle.Fill
-            chkLoginOwner.Font = New Font("Segoe UI", 9.0F)
+            chkLoginOwner.Font = New Font("Segoe UI", 9F)
             chkLoginOwner.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
             chkLoginOwner.Location = New Point(57, 322)
             chkLoginOwner.Margin = New Padding(4)
@@ -158,7 +158,7 @@ Namespace TokoRotiVB
             btnLogin.Cursor = Cursors.Hand
             btnLogin.Dock = DockStyle.Fill
             btnLogin.FlatStyle = FlatStyle.Flat
-            btnLogin.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+            btnLogin.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
             btnLogin.ForeColor = Color.White
             btnLogin.Location = New Point(57, 357)
             btnLogin.Margin = New Padding(4)
@@ -171,31 +171,32 @@ Namespace TokoRotiVB
             ' tlpMain
             ' 
             tlpMain.ColumnCount = 3
-            tlpMain.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 10.0F))
-            tlpMain.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 80.0F))
-            tlpMain.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 10.0F))
+            tlpMain.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 10F))
+            tlpMain.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 80F))
+            tlpMain.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 10F))
             tlpMain.Controls.Add(pnlLogin, 1, 1)
             tlpMain.Dock = DockStyle.Fill
             tlpMain.Location = New Point(0, 0)
             tlpMain.Margin = New Padding(4)
             tlpMain.Name = "tlpMain"
             tlpMain.RowCount = 3
-            tlpMain.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
-            tlpMain.RowStyles.Add(New RowStyle(SizeType.Percent, 80.0F))
-            tlpMain.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
+            tlpMain.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
+            tlpMain.RowStyles.Add(New RowStyle(SizeType.Percent, 80F))
+            tlpMain.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
             tlpMain.Size = New Size(675, 625)
             tlpMain.TabIndex = 0
             ' 
             ' FrmLogin
             ' 
             AcceptButton = btnLogin
-            AutoScaleDimensions = New SizeF(10.0F, 25.0F)
+            AutoScaleDimensions = New SizeF(10F, 25F)
             AutoScaleMode = AutoScaleMode.Font
             BackColor = Color.FromArgb(CByte(245), CByte(247), CByte(250))
             ClientSize = New Size(675, 625)
             Controls.Add(tlpMain)
-            Font = New Font("Segoe UI", 9.0F)
+            Font = New Font("Segoe UI", 9F)
             Margin = New Padding(4)
+            MaximizeBox = False
             MinimumSize = New Size(670, 611)
             Name = "FrmLogin"
             StartPosition = FormStartPosition.CenterScreen

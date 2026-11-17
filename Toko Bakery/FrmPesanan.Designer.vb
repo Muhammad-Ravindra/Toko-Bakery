@@ -111,7 +111,7 @@ Namespace TokoRotiVB
             ' 
             ' cmbPelanggan
             ' 
-            cmbPelanggan.DropDownStyle = ComboBoxStyle.DropDownList
+            cmbPelanggan.AutoCompleteMode = AutoCompleteMode.SuggestAppend
             cmbPelanggan.Location = New Point(200, 82)
             cmbPelanggan.Name = "cmbPelanggan"
             cmbPelanggan.Size = New Size(245, 28)
@@ -251,7 +251,7 @@ Namespace TokoRotiVB
             ' 
             ' cmbProduk
             ' 
-            cmbProduk.DropDownStyle = ComboBoxStyle.DropDownList
+            cmbProduk.AutoCompleteMode = AutoCompleteMode.SuggestAppend
             cmbProduk.Location = New Point(410, 149)
             cmbProduk.Name = "cmbProduk"
             cmbProduk.Size = New Size(255, 28)

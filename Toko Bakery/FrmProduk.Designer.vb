@@ -17,8 +17,8 @@ Namespace TokoRotiVB
 
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-            Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
-            Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
             lblJudulProduk = New Label()
             lblIdProduk = New Label()
             txtIdProduk = New TextBox()
@@ -27,9 +27,7 @@ Namespace TokoRotiVB
             lblKategori = New Label()
             cmbKategori = New ComboBox()
             lblHargaJual = New Label()
-            numHargaJual = New NumericUpDown()
             lblHpp = New Label()
-            numHpp = New NumericUpDown()
             lblMasaSimpan = New Label()
             numMasaSimpan = New NumericUpDown()
             btnTambah = New Button()
@@ -37,15 +35,15 @@ Namespace TokoRotiVB
             btnHapus = New Button()
             btnBersihkan = New Button()
             dgvProduk = New DataGridView()
-            CType(numHargaJual, ISupportInitialize).BeginInit()
-            CType(numHpp, ISupportInitialize).BeginInit()
+            numHargaJual = New TextBox()
+            numHpp = New TextBox()
             CType(numMasaSimpan, ISupportInitialize).BeginInit()
             CType(dgvProduk, ISupportInitialize).BeginInit()
             SuspendLayout()
             ' 
             ' lblJudulProduk
             ' 
-            lblJudulProduk.Font = New Font("Segoe UI", 21F, FontStyle.Bold)
+            lblJudulProduk.Font = New Font("Segoe UI", 21.0F, FontStyle.Bold)
             lblJudulProduk.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
             lblJudulProduk.Location = New Point(35, 22)
             lblJudulProduk.Margin = New Padding(4, 0, 4, 0)
@@ -57,7 +55,7 @@ Namespace TokoRotiVB
             ' 
             ' lblIdProduk
             ' 
-            lblIdProduk.Font = New Font("Segoe UI", 9F)
+            lblIdProduk.Font = New Font("Segoe UI", 9.0F)
             lblIdProduk.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
             lblIdProduk.Location = New Point(38, 88)
             lblIdProduk.Margin = New Padding(4, 0, 4, 0)
@@ -70,7 +68,7 @@ Namespace TokoRotiVB
             ' txtIdProduk
             ' 
             txtIdProduk.Location = New Point(38, 118)
-            txtIdProduk.Margin = New Padding(4, 4, 4, 4)
+            txtIdProduk.Margin = New Padding(4)
             txtIdProduk.Name = "txtIdProduk"
             txtIdProduk.ReadOnly = True
             txtIdProduk.Size = New Size(199, 31)
@@ -78,7 +76,7 @@ Namespace TokoRotiVB
             ' 
             ' lblNamaProduk
             ' 
-            lblNamaProduk.Font = New Font("Segoe UI", 9F)
+            lblNamaProduk.Font = New Font("Segoe UI", 9.0F)
             lblNamaProduk.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
             lblNamaProduk.Location = New Point(262, 88)
             lblNamaProduk.Margin = New Padding(4, 0, 4, 0)
@@ -91,14 +89,14 @@ Namespace TokoRotiVB
             ' txtNamaProduk
             ' 
             txtNamaProduk.Location = New Point(262, 118)
-            txtNamaProduk.Margin = New Padding(4, 4, 4, 4)
+            txtNamaProduk.Margin = New Padding(4)
             txtNamaProduk.Name = "txtNamaProduk"
             txtNamaProduk.Size = New Size(324, 31)
             txtNamaProduk.TabIndex = 4
             ' 
             ' lblKategori
             ' 
-            lblKategori.Font = New Font("Segoe UI", 9F)
+            lblKategori.Font = New Font("Segoe UI", 9.0F)
             lblKategori.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
             lblKategori.Location = New Point(612, 88)
             lblKategori.Margin = New Padding(4, 0, 4, 0)
@@ -112,14 +110,14 @@ Namespace TokoRotiVB
             ' 
             cmbKategori.Items.AddRange(New Object() {"Roti", "Donat", "Kue", "Lainnya"})
             cmbKategori.Location = New Point(612, 118)
-            cmbKategori.Margin = New Padding(4, 4, 4, 4)
+            cmbKategori.Margin = New Padding(4)
             cmbKategori.Name = "cmbKategori"
             cmbKategori.Size = New Size(262, 33)
             cmbKategori.TabIndex = 6
             ' 
             ' lblHargaJual
             ' 
-            lblHargaJual.Font = New Font("Segoe UI", 9F)
+            lblHargaJual.Font = New Font("Segoe UI", 9.0F)
             lblHargaJual.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
             lblHargaJual.Location = New Point(900, 88)
             lblHargaJual.Margin = New Padding(4, 0, 4, 0)
@@ -129,20 +127,9 @@ Namespace TokoRotiVB
             lblHargaJual.Text = "Harga Jual (Rp)"
             lblHargaJual.TextAlign = ContentAlignment.MiddleLeft
             ' 
-            ' numHargaJual
-            ' 
-            numHargaJual.Increment = New Decimal(New Integer() {500, 0, 0, 0})
-            numHargaJual.Location = New Point(900, 118)
-            numHargaJual.Margin = New Padding(4, 4, 4, 4)
-            numHargaJual.Maximum = New Decimal(New Integer() {-727379969, 232, 0, 131072})
-            numHargaJual.Name = "numHargaJual"
-            numHargaJual.Size = New Size(200, 31)
-            numHargaJual.TabIndex = 8
-            numHargaJual.ThousandsSeparator = True
-            ' 
             ' lblHpp
             ' 
-            lblHpp.Font = New Font("Segoe UI", 9F)
+            lblHpp.Font = New Font("Segoe UI", 9.0F)
             lblHpp.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
             lblHpp.Location = New Point(1125, 88)
             lblHpp.Margin = New Padding(4, 0, 4, 0)
@@ -152,20 +139,9 @@ Namespace TokoRotiVB
             lblHpp.Text = "HPP (Rp)"
             lblHpp.TextAlign = ContentAlignment.MiddleLeft
             ' 
-            ' numHpp
-            ' 
-            numHpp.Increment = New Decimal(New Integer() {500, 0, 0, 0})
-            numHpp.Location = New Point(1125, 118)
-            numHpp.Margin = New Padding(4, 4, 4, 4)
-            numHpp.Maximum = New Decimal(New Integer() {-727379969, 232, 0, 131072})
-            numHpp.Name = "numHpp"
-            numHpp.Size = New Size(200, 31)
-            numHpp.TabIndex = 10
-            numHpp.ThousandsSeparator = True
-            ' 
             ' lblMasaSimpan
             ' 
-            lblMasaSimpan.Font = New Font("Segoe UI", 9F)
+            lblMasaSimpan.Font = New Font("Segoe UI", 9.0F)
             lblMasaSimpan.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
             lblMasaSimpan.Location = New Point(38, 175)
             lblMasaSimpan.Margin = New Padding(4, 0, 4, 0)
@@ -178,7 +154,7 @@ Namespace TokoRotiVB
             ' numMasaSimpan
             ' 
             numMasaSimpan.Location = New Point(38, 205)
-            numMasaSimpan.Margin = New Padding(4, 4, 4, 4)
+            numMasaSimpan.Margin = New Padding(4)
             numMasaSimpan.Maximum = New Decimal(New Integer() {87600, 0, 0, 65536})
             numMasaSimpan.Name = "numMasaSimpan"
             numMasaSimpan.Size = New Size(225, 31)
@@ -190,10 +166,10 @@ Namespace TokoRotiVB
             btnTambah.BackColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
             btnTambah.Cursor = Cursors.Hand
             btnTambah.FlatStyle = FlatStyle.Flat
-            btnTambah.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+            btnTambah.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
             btnTambah.ForeColor = Color.White
             btnTambah.Location = New Point(312, 198)
-            btnTambah.Margin = New Padding(4, 4, 4, 4)
+            btnTambah.Margin = New Padding(4)
             btnTambah.Name = "btnTambah"
             btnTambah.Size = New Size(156, 48)
             btnTambah.TabIndex = 13
@@ -207,7 +183,7 @@ Namespace TokoRotiVB
             btnUbah.FlatStyle = FlatStyle.Flat
             btnUbah.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
             btnUbah.Location = New Point(481, 198)
-            btnUbah.Margin = New Padding(4, 4, 4, 4)
+            btnUbah.Margin = New Padding(4)
             btnUbah.Name = "btnUbah"
             btnUbah.Size = New Size(156, 48)
             btnUbah.TabIndex = 14
@@ -221,7 +197,7 @@ Namespace TokoRotiVB
             btnHapus.FlatStyle = FlatStyle.Flat
             btnHapus.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
             btnHapus.Location = New Point(650, 198)
-            btnHapus.Margin = New Padding(4, 4, 4, 4)
+            btnHapus.Margin = New Padding(4)
             btnHapus.Name = "btnHapus"
             btnHapus.Size = New Size(156, 48)
             btnHapus.TabIndex = 15
@@ -235,7 +211,7 @@ Namespace TokoRotiVB
             btnBersihkan.FlatStyle = FlatStyle.Flat
             btnBersihkan.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
             btnBersihkan.Location = New Point(819, 198)
-            btnBersihkan.Margin = New Padding(4, 4, 4, 4)
+            btnBersihkan.Margin = New Padding(4)
             btnBersihkan.Name = "btnBersihkan"
             btnBersihkan.Size = New Size(181, 48)
             btnBersihkan.TabIndex = 16
@@ -249,26 +225,26 @@ Namespace TokoRotiVB
             dgvProduk.AllowUserToResizeRows = False
             dgvProduk.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             dgvProduk.BackgroundColor = Color.White
-            DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
-            DataGridViewCellStyle1.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-            DataGridViewCellStyle1.ForeColor = Color.White
-            DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
-            DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
-            DataGridViewCellStyle1.WrapMode = DataGridViewTriState.True
-            dgvProduk.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
+            DataGridViewCellStyle3.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+            DataGridViewCellStyle3.ForeColor = Color.White
+            DataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight
+            DataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText
+            DataGridViewCellStyle3.WrapMode = DataGridViewTriState.True
+            dgvProduk.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
             dgvProduk.ColumnHeadersHeight = 29
-            DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle2.BackColor = SystemColors.Window
-            DataGridViewCellStyle2.Font = New Font("Segoe UI", 9F)
-            DataGridViewCellStyle2.ForeColor = SystemColors.ControlText
-            DataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(CByte(214), CByte(231), CByte(247))
-            DataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(CByte(40), CByte(49), CByte(59))
-            DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
-            dgvProduk.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle4.BackColor = SystemColors.Window
+            DataGridViewCellStyle4.Font = New Font("Segoe UI", 9.0F)
+            DataGridViewCellStyle4.ForeColor = SystemColors.ControlText
+            DataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(CByte(214), CByte(231), CByte(247))
+            DataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(CByte(40), CByte(49), CByte(59))
+            DataGridViewCellStyle4.WrapMode = DataGridViewTriState.False
+            dgvProduk.DefaultCellStyle = DataGridViewCellStyle4
             dgvProduk.EnableHeadersVisualStyles = False
             dgvProduk.Location = New Point(38, 281)
-            dgvProduk.Margin = New Padding(4, 4, 4, 4)
+            dgvProduk.Margin = New Padding(4)
             dgvProduk.MultiSelect = False
             dgvProduk.Name = "dgvProduk"
             dgvProduk.ReadOnly = True
@@ -278,12 +254,28 @@ Namespace TokoRotiVB
             dgvProduk.Size = New Size(1300, 550)
             dgvProduk.TabIndex = 17
             ' 
+            ' numHargaJual
+            ' 
+            numHargaJual.Location = New Point(900, 118)
+            numHargaJual.Name = "numHargaJual"
+            numHargaJual.Size = New Size(169, 31)
+            numHargaJual.TabIndex = 0
+            ' 
+            ' numHpp
+            ' 
+            numHpp.Location = New Point(1125, 120)
+            numHpp.Name = "numHpp"
+            numHpp.Size = New Size(150, 31)
+            numHpp.TabIndex = 18
+            ' 
             ' FrmProduk
             ' 
-            AutoScaleDimensions = New SizeF(10F, 25F)
+            AutoScaleDimensions = New SizeF(10.0F, 25.0F)
             AutoScaleMode = AutoScaleMode.Font
             BackColor = Color.FromArgb(CByte(245), CByte(247), CByte(250))
             ClientSize = New Size(1400, 900)
+            Controls.Add(numHpp)
+            Controls.Add(numHargaJual)
             Controls.Add(lblJudulProduk)
             Controls.Add(lblIdProduk)
             Controls.Add(txtIdProduk)
@@ -292,9 +284,7 @@ Namespace TokoRotiVB
             Controls.Add(lblKategori)
             Controls.Add(cmbKategori)
             Controls.Add(lblHargaJual)
-            Controls.Add(numHargaJual)
             Controls.Add(lblHpp)
-            Controls.Add(numHpp)
             Controls.Add(lblMasaSimpan)
             Controls.Add(numMasaSimpan)
             Controls.Add(btnTambah)
@@ -302,13 +292,11 @@ Namespace TokoRotiVB
             Controls.Add(btnHapus)
             Controls.Add(btnBersihkan)
             Controls.Add(dgvProduk)
-            Font = New Font("Segoe UI", 9F)
-            Margin = New Padding(4, 4, 4, 4)
+            Font = New Font("Segoe UI", 9.0F)
+            Margin = New Padding(4)
             Name = "FrmProduk"
             StartPosition = FormStartPosition.CenterScreen
             Text = "Data Produk - Sistem Kasir Toko Roti"
-            CType(numHargaJual, ISupportInitialize).EndInit()
-            CType(numHpp, ISupportInitialize).EndInit()
             CType(numMasaSimpan, ISupportInitialize).EndInit()
             CType(dgvProduk, ISupportInitialize).EndInit()
             ResumeLayout(False)
@@ -323,9 +311,7 @@ Namespace TokoRotiVB
         Friend WithEvents lblKategori As System.Windows.Forms.Label
         Friend WithEvents cmbKategori As System.Windows.Forms.ComboBox
         Friend WithEvents lblHargaJual As System.Windows.Forms.Label
-        Friend WithEvents numHargaJual As System.Windows.Forms.NumericUpDown
         Friend WithEvents lblHpp As System.Windows.Forms.Label
-        Friend WithEvents numHpp As System.Windows.Forms.NumericUpDown
         Friend WithEvents lblMasaSimpan As System.Windows.Forms.Label
         Friend WithEvents numMasaSimpan As System.Windows.Forms.NumericUpDown
         Friend WithEvents btnTambah As System.Windows.Forms.Button
@@ -333,5 +319,7 @@ Namespace TokoRotiVB
         Friend WithEvents btnHapus As System.Windows.Forms.Button
         Friend WithEvents btnBersihkan As System.Windows.Forms.Button
         Friend WithEvents dgvProduk As System.Windows.Forms.DataGridView
+        Friend WithEvents numHargaJual As TextBox
+        Friend WithEvents numHpp As TextBox
     End Class
 End Namespace

@@ -4,7 +4,7 @@ Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
 
 Namespace TokoRotiVB
-    Public Partial Class FrmPesanan
+    Partial Public Class FrmPesanan
         Private ReadOnly _detailTable As New DataTable()
         Private bsPelanggan As New BindingSource()
         Private _updatingSummary As Boolean = False
@@ -28,21 +28,28 @@ Namespace TokoRotiVB
             AddHandler numQty.ValueChanged, Sub(sender, e) HitungSubtotalItem()
             AddHandler numDP.ValueChanged, Sub(sender, e) HitungRingkasan()
             AddHandler Me.Load, Sub(sender, e) MuatPilihan()
-            AddHandler cmbPelanggan.TextUpdate, Sub(sender, e) FilterPelanggan()
-            AddHandler cmbPelanggan.DropDownClosed, Sub(sender, e) ResetFilterPelanggan()
+            ' (removed the manual filter handlers for cmbPelanggan)
         End Sub
 
         Private Sub MuatPilihan()
             Try
-                cmbPelanggan.DropDownStyle = ComboBoxStyle.DropDown ' Allows typing
-                bsPelanggan.DataSource = Database.Query("SELECT id_pelanggan, CONCAT(id_pelanggan, ' - ', nama) AS pilihan FROM pelanggan ORDER BY nama")
+                ' --- cmbPelanggan: DropDown + built-in autocomplete ---
+                cmbPelanggan.DropDownStyle = ComboBoxStyle.DropDown          ' allows typing
+                cmbPelanggan.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+                cmbPelanggan.AutoCompleteSource = AutoCompleteSource.ListItems
+                bsPelanggan.DataSource = Database.Query("SELECT id_pelanggan, nama AS pilihan FROM pelanggan ORDER BY nama")
                 cmbPelanggan.DataSource = bsPelanggan
                 cmbPelanggan.DisplayMember = "pilihan"
                 cmbPelanggan.ValueMember = "id_pelanggan"
 
-                cmbProduk.DataSource = Database.Query("SELECT id_produk, nama_produk, harga_jual, CONCAT(id_produk, ' - ', nama_produk) AS pilihan FROM produk ORDER BY nama_produk")
+                ' --- cmbProduk: same treatment ---
+                cmbProduk.DropDownStyle = ComboBoxStyle.DropDown            ' allows typing
+                cmbProduk.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+                cmbProduk.AutoCompleteSource = AutoCompleteSource.ListItems
+                cmbProduk.DataSource = Database.Query("SELECT id_produk, nama_produk, harga_jual, nama_produk AS pilihan FROM produk ORDER BY nama_produk")
                 cmbProduk.DisplayMember = "pilihan"
                 cmbProduk.ValueMember = "id_produk"
+
                 cmbSumber.Text = "WA"
                 cmbStatusPesanan.SelectedItem = "BARU"
                 cmbStatusBayar.SelectedItem = "BELUM"
@@ -66,7 +73,7 @@ Namespace TokoRotiVB
                 Return
             End If
             Dim harga As Decimal = Convert.ToDecimal(row("harga_jual"))
-            txtHarga.Text = harga.ToString("N2")
+            txtHarga.Text = harga.ToString("N0")
             HitungSubtotalItem()
         End Sub
 
@@ -76,7 +83,7 @@ Namespace TokoRotiVB
                 txtSubtotal.Text = "0.00"
                 Return
             End If
-            txtSubtotal.Text = (Convert.ToDecimal(row("harga_jual")) * numQty.Value).ToString("N2")
+            txtSubtotal.Text = (Convert.ToDecimal(row("harga_jual")) * numQty.Value).ToString("N0")
         End Sub
 
         Private Sub TambahItem()
@@ -116,8 +123,8 @@ Namespace TokoRotiVB
             Try
                 Dim total As Decimal = TotalPesanan()
                 If numDP.Value > total Then numDP.Value = total
-                txtTotal.Text = total.ToString("N2")
-                txtSisa.Text = Math.Max(total - numDP.Value, 0D).ToString("N2")
+                txtTotal.Text = total.ToString("N0")
+                txtSisa.Text = Math.Max(total - numDP.Value, 0D).ToString("N0")
                 If total > 0D AndAlso numDP.Value >= total Then
                     cmbStatusBayar.SelectedItem = "LUNAS"
                 ElseIf numDP.Value > 0D Then
@@ -219,7 +226,7 @@ Namespace TokoRotiVB
             cmbSumber.Text = "WA"
             cmbStatusPesanan.SelectedItem = "BARU"
             cmbStatusBayar.SelectedItem = "BELUM"
-            bsPelanggan.Filter = ""
+            ' (removed: bsPelanggan.Filter = ""  -- no longer filtering)
             If cmbPelanggan.Items.Count > 0 Then cmbPelanggan.SelectedIndex = 0
             If cmbProduk.Items.Count > 0 Then cmbProduk.SelectedIndex = 0
             numQty.Value = 1
@@ -235,31 +242,8 @@ Namespace TokoRotiVB
 
         End Sub
 
-        ' --- ADDED THESE TWO METHODS ---
-        Private Sub FilterPelanggan()
-            Dim typedText As String = cmbPelanggan.Text
+        Private Sub txtTotal_TextChanged(sender As Object, e As EventArgs) Handles txtTotal.TextChanged
 
-            If String.IsNullOrWhiteSpace(typedText) Then
-                bsPelanggan.Filter = ""
-            Else
-                Dim safeText As String = typedText.Replace("'", "''")
-                bsPelanggan.Filter = String.Format("pilihan LIKE '%{0}%'", safeText)
-            End If
-
-            ' Restore the text and cursor position
-            cmbPelanggan.Text = typedText
-            cmbPelanggan.SelectionStart = typedText.Length
-
-            ' Keep the dropdown open
-            cmbPelanggan.DroppedDown = True
         End Sub
-
-        Private Sub ResetFilterPelanggan()
-            ' Reset filter to show all items when the dropdown closes
-            bsPelanggan.Filter = ""
-            cmbPelanggan.Text = cmbPelanggan.Text
-        End Sub
-        ' -------------------------------
-
     End Class
 End Namespace
