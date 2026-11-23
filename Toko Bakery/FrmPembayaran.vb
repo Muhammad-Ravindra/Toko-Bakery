@@ -25,7 +25,7 @@ Namespace TokoRotiVB
 
         Private Sub MuatPesanan()
             Try
-                Dim table = Database.Query("SELECT ps.id_pesanan, CONCAT('Pesanan #', ps.id_pesanan, ' - ', pl.nama) AS pilihan FROM pesanan ps INNER JOIN pelanggan pl ON pl.id_pelanggan=ps.id_pelanggan WHERE ps.sisa > 0 ORDER BY ps.id_pesanan DESC")
+                Dim table = Database.Query("SELECT ps.id_pesanan, CONCAT('Pesanan #', ps.id_pesanan, ' - ', pl.nama) AS pilihan FROM pesanan ps INNER JOIN pelanggan pl ON pl.id_pelanggan=ps.id_pelanggan WHERE ps.sisa > 0 AND pl.is_deleted = 0 ORDER BY ps.id_pesanan DESC")
                 cmbPesanan.DataSource = table
                 cmbPesanan.DisplayMember = "pilihan"
                 cmbPesanan.ValueMember = "id_pesanan"
@@ -138,6 +138,10 @@ Namespace TokoRotiVB
         End Sub
 
         Private Sub FrmPembayaran_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        End Sub
+
+        Private Sub lblRiwayat_Click(sender As Object, e As EventArgs) Handles lblRiwayat.Click
 
         End Sub
     End Class

@@ -10,6 +10,10 @@ Namespace TokoRotiVB
         ' match the ones we know how to parse back. (Indonesian: '.' thousands, ',' decimal)
         Private Shared ReadOnly IdCulture As CultureInfo = CultureInfo.GetCultureInfo("id-ID")
 
+        ' Pengganti txtIdProduk: menyimpan id produk yang sedang dipilih.
+        ' Nothing = belum ada baris yang dipilih.
+        Private _selectedId As Integer? = Nothing
+
         Public Sub New()
             InitializeComponent()
             UiHelpers.ConfigureGrid(dgvProduk)
@@ -28,8 +32,14 @@ Namespace TokoRotiVB
             UpdateButtonState()
         End Sub
 
+        Private ReadOnly Property HasSelection As Boolean
+            Get
+                Return _selectedId.HasValue
+            End Get
+        End Property
+
         Private Sub UpdateButtonState()
-            Dim isSelected As Boolean = Not String.IsNullOrWhiteSpace(txtIdProduk.Text)
+            Dim isSelected As Boolean = HasSelection
             btnTambah.Enabled = Not isSelected
             btnUbah.Enabled = isSelected AndAlso AppSession.IsOwner
             btnHapus.Enabled = isSelected AndAlso AppSession.IsOwner
@@ -94,6 +104,7 @@ Namespace TokoRotiVB
                         col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     End If
                 Next
+                dgvProduk.ClearSelection()
             Catch ex As Exception
                 UiHelpers.ShowError(ex, "Gagal memuat data produk")
             End Try
@@ -125,8 +136,7 @@ Namespace TokoRotiVB
 
         Private Sub Ubah()
             If Not AppSession.IsOwner Then Return
-            Dim id As Integer
-            If Not UiHelpers.IsNumericId(txtIdProduk.Text, id) Then
+            If Not HasSelection Then
                 MessageBox.Show("Pilih produk yang ingin diubah.")
                 Return
             End If
@@ -145,7 +155,7 @@ Namespace TokoRotiVB
                     New MySqlParameter("@harga", hargaJual),
                     New MySqlParameter("@hpp", hpp),
                     New MySqlParameter("@masa", Decimal.ToInt32(numMasaSimpan.Value)),
-                    New MySqlParameter("@id", id))
+                    New MySqlParameter("@id", _selectedId.Value))
                 MuatData()
                 Bersihkan()
             Catch ex As Exception
@@ -155,14 +165,13 @@ Namespace TokoRotiVB
 
         Private Sub Hapus()
             If Not AppSession.IsOwner Then Return
-            Dim id As Integer
-            If Not UiHelpers.IsNumericId(txtIdProduk.Text, id) Then
+            If Not HasSelection Then
                 MessageBox.Show("Pilih produk yang ingin dihapus.")
                 Return
             End If
             If MessageBox.Show("Hapus produk terpilih? Penghapusan dapat ditolak jika produk sudah digunakan dalam detail pesanan.", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) <> DialogResult.Yes Then Return
             Try
-                Database.Execute("DELETE FROM produk WHERE id_produk=@id", New MySqlParameter("@id", id))
+                Database.Execute("DELETE FROM produk WHERE id_produk=@id", New MySqlParameter("@id", _selectedId.Value))
                 MuatData()
                 Bersihkan()
             Catch ex As Exception
@@ -173,7 +182,11 @@ Namespace TokoRotiVB
         Private Sub PilihBaris()
             If dgvProduk.CurrentRow Is Nothing Then Return
             Dim row As DataGridViewRow = dgvProduk.CurrentRow
-            txtIdProduk.Text = Convert.ToString(row.Cells("id_produk").Value)
+
+            Dim id As Integer
+            If Not Integer.TryParse(Convert.ToString(row.Cells("id_produk").Value), id) Then Return
+            _selectedId = id
+
             txtNamaProduk.Text = Convert.ToString(row.Cells("nama_produk").Value)
             cmbKategori.Text = Convert.ToString(row.Cells("kategori").Value)
 
@@ -198,7 +211,7 @@ Namespace TokoRotiVB
         End Sub
 
         Private Sub Bersihkan()
-            txtIdProduk.Clear()
+            _selectedId = Nothing
             txtNamaProduk.Clear()
             cmbKategori.SelectedIndex = -1
             cmbKategori.Text = String.Empty

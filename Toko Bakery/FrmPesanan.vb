@@ -9,6 +9,9 @@ Namespace TokoRotiVB
         Private bsPelanggan As New BindingSource()
         Private _updatingSummary As Boolean = False
 
+        ' Pengganti txtIdPesanan (menyimpan ID terakhir yang berhasil disimpan)
+        Private _lastSavedOrderId As Integer? = Nothing
+
         Public Sub New()
             InitializeComponent()
             cmbStatusBayar.Enabled = False
@@ -20,6 +23,7 @@ Namespace TokoRotiVB
             _detailTable.Columns.Add("harga_satuan", GetType(Decimal))
             _detailTable.Columns.Add("subtotal", GetType(Decimal))
             dgvDetailPesanan.DataSource = _detailTable
+
             AddHandler btnTambahItem.Click, Sub(sender, e) TambahItem()
             AddHandler btnHapusItem.Click, Sub(sender, e) HapusItem()
             AddHandler btnSimpan.Click, Sub(sender, e) SimpanPesanan()
@@ -28,7 +32,6 @@ Namespace TokoRotiVB
             AddHandler numQty.ValueChanged, Sub(sender, e) HitungSubtotalItem()
             AddHandler numDP.ValueChanged, Sub(sender, e) HitungRingkasan()
             AddHandler Me.Load, Sub(sender, e) MuatPilihan()
-            ' (removed the manual filter handlers for cmbPelanggan)
         End Sub
 
         Private Sub MuatPilihan()
@@ -37,7 +40,7 @@ Namespace TokoRotiVB
                 cmbPelanggan.DropDownStyle = ComboBoxStyle.DropDown          ' allows typing
                 cmbPelanggan.AutoCompleteMode = AutoCompleteMode.SuggestAppend
                 cmbPelanggan.AutoCompleteSource = AutoCompleteSource.ListItems
-                bsPelanggan.DataSource = Database.Query("SELECT id_pelanggan, nama AS pilihan FROM pelanggan ORDER BY nama")
+                bsPelanggan.DataSource = Database.Query("SELECT id_pelanggan, nama AS pilihan FROM pelanggan WHERE is_deleted = 0 ORDER BY nama")
                 cmbPelanggan.DataSource = bsPelanggan
                 cmbPelanggan.DisplayMember = "pilihan"
                 cmbPelanggan.ValueMember = "id_pelanggan"
@@ -202,6 +205,10 @@ Namespace TokoRotiVB
                                 End Using
                             End If
                             transaction.Commit()
+
+                            ' Simpan ID ke variabel memori (karena txtIdPesanan sudah dihapus)
+                            _lastSavedOrderId = idPesanan
+
                             MessageBox.Show("Pesanan berhasil disimpan dengan ID " & idPesanan.ToString() & ".", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information)
                             Bersihkan()
                         Catch
@@ -217,7 +224,10 @@ Namespace TokoRotiVB
 
         Private Sub Bersihkan()
             _detailTable.Clear()
-            txtIdPesanan.Text = "(otomatis)"
+
+            ' Hapus txtIdPesanan, ganti dengan reset variabel ID
+            _lastSavedOrderId = Nothing
+
             txtCatatan.Clear()
             numDP.Value = 0
             dtpTanggalPesan.Value = Date.Today
@@ -226,7 +236,7 @@ Namespace TokoRotiVB
             cmbSumber.Text = "WA"
             cmbStatusPesanan.SelectedItem = "BARU"
             cmbStatusBayar.SelectedItem = "BELUM"
-            ' (removed: bsPelanggan.Filter = ""  -- no longer filtering)
+
             If cmbPelanggan.Items.Count > 0 Then cmbPelanggan.SelectedIndex = 0
             If cmbProduk.Items.Count > 0 Then cmbProduk.SelectedIndex = 0
             numQty.Value = 1
@@ -235,15 +245,18 @@ Namespace TokoRotiVB
         End Sub
 
         Private Sub dgvDetailPesanan_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDetailPesanan.CellContentClick
-
         End Sub
 
         Private Sub FrmPesanan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         End Sub
 
         Private Sub txtTotal_TextChanged(sender As Object, e As EventArgs) Handles txtTotal.TextChanged
+        End Sub
 
+        Private Sub dtpJamKirim_ValueChanged(sender As Object, e As EventArgs) Handles dtpJamKirim.ValueChanged
+        End Sub
+
+        Private Sub lblTanggalKirim_Click(sender As Object, e As EventArgs) Handles lblTanggalKirim.Click
         End Sub
     End Class
 End Namespace

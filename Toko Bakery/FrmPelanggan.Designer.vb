@@ -20,14 +20,10 @@ Namespace TokoRotiVB
             Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
             lblJudulPelanggan = New Label()
-            lblIdPelanggan = New Label()
-            txtIdPelanggan = New TextBox()
             lblNama = New Label()
             txtNama = New TextBox()
             lblTipe = New Label()
             cmbTipe = New ComboBox()
-            lblKontak = New Label()
-            txtKontak = New TextBox()
             lblTermin = New Label()
             numTermin = New NumericUpDown()
             btnTambah = New Button()
@@ -47,35 +43,16 @@ Namespace TokoRotiVB
             lblJudulPelanggan.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
             lblJudulPelanggan.Location = New Point(28, 9)
             lblJudulPelanggan.Name = "lblJudulPelanggan"
-            lblJudulPelanggan.Size = New Size(600, 52)
+            lblJudulPelanggan.Size = New Size(294, 52)
             lblJudulPelanggan.TabIndex = 0
             lblJudulPelanggan.Text = "Data Pelanggan"
             lblJudulPelanggan.TextAlign = ContentAlignment.MiddleLeft
-            ' 
-            ' lblIdPelanggan
-            ' 
-            lblIdPelanggan.Font = New Font("Segoe UI", 9F)
-            lblIdPelanggan.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblIdPelanggan.Location = New Point(30, 70)
-            lblIdPelanggan.Name = "lblIdPelanggan"
-            lblIdPelanggan.Size = New Size(160, 22)
-            lblIdPelanggan.TabIndex = 1
-            lblIdPelanggan.Text = "ID Pelanggan"
-            lblIdPelanggan.TextAlign = ContentAlignment.MiddleLeft
-            ' 
-            ' txtIdPelanggan
-            ' 
-            txtIdPelanggan.Location = New Point(30, 94)
-            txtIdPelanggan.Name = "txtIdPelanggan"
-            txtIdPelanggan.ReadOnly = True
-            txtIdPelanggan.Size = New Size(160, 27)
-            txtIdPelanggan.TabIndex = 2
             ' 
             ' lblNama
             ' 
             lblNama.Font = New Font("Segoe UI", 9F)
             lblNama.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblNama.Location = New Point(210, 70)
+            lblNama.Location = New Point(30, 90)
             lblNama.Name = "lblNama"
             lblNama.Size = New Size(230, 22)
             lblNama.TabIndex = 3
@@ -84,7 +61,7 @@ Namespace TokoRotiVB
             ' 
             ' txtNama
             ' 
-            txtNama.Location = New Point(210, 94)
+            txtNama.Location = New Point(30, 114)
             txtNama.Name = "txtNama"
             txtNama.Size = New Size(230, 27)
             txtNama.TabIndex = 4
@@ -93,7 +70,7 @@ Namespace TokoRotiVB
             ' 
             lblTipe.Font = New Font("Segoe UI", 9F)
             lblTipe.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblTipe.Location = New Point(460, 70)
+            lblTipe.Location = New Point(290, 90)
             lblTipe.Name = "lblTipe"
             lblTipe.Size = New Size(170, 22)
             lblTipe.TabIndex = 5
@@ -103,35 +80,17 @@ Namespace TokoRotiVB
             ' cmbTipe
             ' 
             cmbTipe.DropDownStyle = ComboBoxStyle.DropDownList
-            cmbTipe.Items.AddRange(New Object() {"individu", "reseller"})
-            cmbTipe.Location = New Point(460, 94)
+            cmbTipe.Items.AddRange(New Object() {"individu", "reseller", "perusahaan"})
+            cmbTipe.Location = New Point(290, 113)
             cmbTipe.Name = "cmbTipe"
             cmbTipe.Size = New Size(170, 28)
             cmbTipe.TabIndex = 6
-            ' 
-            ' lblKontak
-            ' 
-            lblKontak.Font = New Font("Segoe UI", 9F)
-            lblKontak.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblKontak.Location = New Point(650, 70)
-            lblKontak.Name = "lblKontak"
-            lblKontak.Size = New Size(220, 22)
-            lblKontak.TabIndex = 7
-            lblKontak.Text = "Kontak"
-            lblKontak.TextAlign = ContentAlignment.MiddleLeft
-            ' 
-            ' txtKontak
-            ' 
-            txtKontak.Location = New Point(650, 94)
-            txtKontak.Name = "txtKontak"
-            txtKontak.Size = New Size(220, 27)
-            txtKontak.TabIndex = 8
             ' 
             ' lblTermin
             ' 
             lblTermin.Font = New Font("Segoe UI", 9F)
             lblTermin.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblTermin.Location = New Point(890, 70)
+            lblTermin.Location = New Point(30, 393)
             lblTermin.Name = "lblTermin"
             lblTermin.Size = New Size(180, 22)
             lblTermin.TabIndex = 9
@@ -140,7 +99,7 @@ Namespace TokoRotiVB
             ' 
             ' numTermin
             ' 
-            numTermin.Location = New Point(890, 94)
+            numTermin.Location = New Point(30, 418)
             numTermin.Maximum = New Decimal(New Integer() {36500, 0, 0, 65536})
             numTermin.Name = "numTermin"
             numTermin.Size = New Size(180, 27)
@@ -149,12 +108,13 @@ Namespace TokoRotiVB
             ' 
             ' btnTambah
             ' 
+            btnTambah.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
             btnTambah.BackColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
             btnTambah.Cursor = Cursors.Hand
             btnTambah.FlatStyle = FlatStyle.Flat
             btnTambah.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
             btnTambah.ForeColor = Color.White
-            btnTambah.Location = New Point(29, 206)
+            btnTambah.Location = New Point(28, 627)
             btnTambah.Name = "btnTambah"
             btnTambah.Size = New Size(125, 38)
             btnTambah.TabIndex = 11
@@ -163,12 +123,13 @@ Namespace TokoRotiVB
             ' 
             ' btnUbah
             ' 
+            btnUbah.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
             btnUbah.BackColor = Color.FromArgb(CByte(224), CByte(235), CByte(246))
             btnUbah.Cursor = Cursors.Hand
             btnUbah.Enabled = False
             btnUbah.FlatStyle = FlatStyle.Flat
             btnUbah.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
-            btnUbah.Location = New Point(164, 206)
+            btnUbah.Location = New Point(159, 627)
             btnUbah.Name = "btnUbah"
             btnUbah.Size = New Size(125, 38)
             btnUbah.TabIndex = 12
@@ -177,12 +138,13 @@ Namespace TokoRotiVB
             ' 
             ' btnHapus
             ' 
+            btnHapus.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
             btnHapus.BackColor = Color.FromArgb(CByte(224), CByte(235), CByte(246))
             btnHapus.Cursor = Cursors.Hand
             btnHapus.Enabled = False
             btnHapus.FlatStyle = FlatStyle.Flat
             btnHapus.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
-            btnHapus.Location = New Point(299, 206)
+            btnHapus.Location = New Point(454, 627)
             btnHapus.Name = "btnHapus"
             btnHapus.Size = New Size(125, 38)
             btnHapus.TabIndex = 13
@@ -191,13 +153,14 @@ Namespace TokoRotiVB
             ' 
             ' btnBersihkan
             ' 
+            btnBersihkan.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
             btnBersihkan.BackColor = Color.FromArgb(CByte(224), CByte(235), CByte(246))
             btnBersihkan.Cursor = Cursors.Hand
             btnBersihkan.FlatStyle = FlatStyle.Flat
             btnBersihkan.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
-            btnBersihkan.Location = New Point(434, 206)
+            btnBersihkan.Location = New Point(30, 468)
             btnBersihkan.Name = "btnBersihkan"
-            btnBersihkan.Size = New Size(145, 38)
+            btnBersihkan.Size = New Size(125, 38)
             btnBersihkan.TabIndex = 14
             btnBersihkan.Text = "Bersihkan"
             btnBersihkan.UseVisualStyleBackColor = False
@@ -207,6 +170,7 @@ Namespace TokoRotiVB
             dgvPelanggan.AllowUserToAddRows = False
             dgvPelanggan.AllowUserToDeleteRows = False
             dgvPelanggan.AllowUserToResizeRows = False
+            dgvPelanggan.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
             dgvPelanggan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             dgvPelanggan.BackgroundColor = Color.White
             DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
@@ -227,21 +191,21 @@ Namespace TokoRotiVB
             DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
             dgvPelanggan.DefaultCellStyle = DataGridViewCellStyle2
             dgvPelanggan.EnableHeadersVisualStyles = False
-            dgvPelanggan.Location = New Point(30, 260)
+            dgvPelanggan.Location = New Point(595, 12)
             dgvPelanggan.MultiSelect = False
             dgvPelanggan.Name = "dgvPelanggan"
             dgvPelanggan.ReadOnly = True
             dgvPelanggan.RowHeadersVisible = False
             dgvPelanggan.RowHeadersWidth = 51
             dgvPelanggan.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            dgvPelanggan.Size = New Size(1040, 405)
+            dgvPelanggan.Size = New Size(502, 653)
             dgvPelanggan.TabIndex = 15
             ' 
             ' Label1
             ' 
             Label1.Font = New Font("Segoe UI", 9F)
             Label1.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            Label1.Location = New Point(30, 144)
+            Label1.Location = New Point(30, 161)
             Label1.Name = "Label1"
             Label1.Size = New Size(230, 22)
             Label1.TabIndex = 16
@@ -250,7 +214,7 @@ Namespace TokoRotiVB
             ' 
             ' txtAlamat
             ' 
-            txtAlamat.Location = New Point(28, 169)
+            txtAlamat.Location = New Point(30, 186)
             txtAlamat.Name = "txtAlamat"
             txtAlamat.Size = New Size(549, 27)
             txtAlamat.TabIndex = 17
@@ -264,14 +228,10 @@ Namespace TokoRotiVB
             Controls.Add(txtAlamat)
             Controls.Add(Label1)
             Controls.Add(lblJudulPelanggan)
-            Controls.Add(lblIdPelanggan)
-            Controls.Add(txtIdPelanggan)
             Controls.Add(lblNama)
             Controls.Add(txtNama)
             Controls.Add(lblTipe)
             Controls.Add(cmbTipe)
-            Controls.Add(lblKontak)
-            Controls.Add(txtKontak)
             Controls.Add(lblTermin)
             Controls.Add(numTermin)
             Controls.Add(btnTambah)
@@ -282,7 +242,7 @@ Namespace TokoRotiVB
             Font = New Font("Segoe UI", 9F)
             Name = "FrmPelanggan"
             StartPosition = FormStartPosition.CenterScreen
-            Text = "`"
+            Text = "Data Pelanggan"
             CType(numTermin, ISupportInitialize).EndInit()
             CType(dgvPelanggan, ISupportInitialize).EndInit()
             ResumeLayout(False)
@@ -290,14 +250,10 @@ Namespace TokoRotiVB
         End Sub
 
         Friend WithEvents lblJudulPelanggan As System.Windows.Forms.Label
-        Friend WithEvents lblIdPelanggan As System.Windows.Forms.Label
-        Friend WithEvents txtIdPelanggan As System.Windows.Forms.TextBox
         Friend WithEvents lblNama As System.Windows.Forms.Label
         Friend WithEvents txtNama As System.Windows.Forms.TextBox
         Friend WithEvents lblTipe As System.Windows.Forms.Label
         Friend WithEvents cmbTipe As System.Windows.Forms.ComboBox
-        Friend WithEvents lblKontak As System.Windows.Forms.Label
-        Friend WithEvents txtKontak As System.Windows.Forms.TextBox
         Friend WithEvents lblTermin As System.Windows.Forms.Label
         Friend WithEvents numTermin As System.Windows.Forms.NumericUpDown
         Friend WithEvents btnTambah As System.Windows.Forms.Button

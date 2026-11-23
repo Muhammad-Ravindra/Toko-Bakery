@@ -38,10 +38,9 @@ Namespace TokoRotiVB
             pnlLogin.BorderStyle = BorderStyle.FixedSingle
             pnlLogin.Controls.Add(tlpLogin)
             pnlLogin.Dock = DockStyle.Fill
-            pnlLogin.Location = New Point(71, 66)
-            pnlLogin.Margin = New Padding(4)
+            pnlLogin.Location = New Point(57, 53)
             pnlLogin.Name = "pnlLogin"
-            pnlLogin.Size = New Size(532, 492)
+            pnlLogin.Size = New Size(426, 394)
             pnlLogin.TabIndex = 0
             ' 
             ' tlpLogin
@@ -61,21 +60,20 @@ Namespace TokoRotiVB
             tlpLogin.Controls.Add(btnLogin, 1, 9)
             tlpLogin.Dock = DockStyle.Fill
             tlpLogin.Location = New Point(0, 0)
-            tlpLogin.Margin = New Padding(4)
             tlpLogin.Name = "tlpLogin"
             tlpLogin.RowCount = 11
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 31F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 56F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 75F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 30F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 34F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 25F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 45F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 60F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 24F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 27F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 22F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 24F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 27F))
             tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 28F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 30F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 34F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 35F))
-            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 52F))
+            tlpLogin.RowStyles.Add(New RowStyle(SizeType.Absolute, 42F))
             tlpLogin.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
-            tlpLogin.Size = New Size(530, 490)
+            tlpLogin.Size = New Size(424, 392)
             tlpLogin.TabIndex = 1
             ' 
             ' lblJudul
@@ -84,10 +82,9 @@ Namespace TokoRotiVB
             lblJudul.Dock = DockStyle.Fill
             lblJudul.Font = New Font("Segoe UI", 20F, FontStyle.Bold)
             lblJudul.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
-            lblJudul.Location = New Point(4, 31)
-            lblJudul.Margin = New Padding(4, 0, 4, 0)
+            lblJudul.Location = New Point(3, 25)
             lblJudul.Name = "lblJudul"
-            lblJudul.Size = New Size(522, 56)
+            lblJudul.Size = New Size(418, 45)
             lblJudul.TabIndex = 1
             lblJudul.Text = "Sistem Kasir Toko Roti"
             lblJudul.TextAlign = ContentAlignment.MiddleCenter
@@ -97,10 +94,9 @@ Namespace TokoRotiVB
             lblUsername.Dock = DockStyle.Fill
             lblUsername.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
             lblUsername.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblUsername.Location = New Point(57, 162)
-            lblUsername.Margin = New Padding(4, 0, 4, 0)
+            lblUsername.Location = New Point(45, 130)
             lblUsername.Name = "lblUsername"
-            lblUsername.Size = New Size(416, 30)
+            lblUsername.Size = New Size(333, 24)
             lblUsername.TabIndex = 2
             lblUsername.Text = "Username"
             lblUsername.TextAlign = ContentAlignment.BottomLeft
@@ -108,10 +104,9 @@ Namespace TokoRotiVB
             ' txtUsername
             ' 
             txtUsername.Dock = DockStyle.Fill
-            txtUsername.Location = New Point(57, 196)
-            txtUsername.Margin = New Padding(4)
+            txtUsername.Location = New Point(45, 157)
             txtUsername.Name = "txtUsername"
-            txtUsername.Size = New Size(416, 31)
+            txtUsername.Size = New Size(333, 27)
             txtUsername.TabIndex = 3
             ' 
             ' lblPassword
@@ -119,10 +114,9 @@ Namespace TokoRotiVB
             lblPassword.Dock = DockStyle.Fill
             lblPassword.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
             lblPassword.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblPassword.Location = New Point(57, 254)
-            lblPassword.Margin = New Padding(4, 0, 4, 0)
+            lblPassword.Location = New Point(45, 203)
             lblPassword.Name = "lblPassword"
-            lblPassword.Size = New Size(416, 30)
+            lblPassword.Size = New Size(333, 24)
             lblPassword.TabIndex = 4
             lblPassword.Text = "Password"
             lblPassword.TextAlign = ContentAlignment.BottomLeft
@@ -130,10 +124,9 @@ Namespace TokoRotiVB
             ' txtPassword
             ' 
             txtPassword.Dock = DockStyle.Fill
-            txtPassword.Location = New Point(57, 288)
-            txtPassword.Margin = New Padding(4)
+            txtPassword.Location = New Point(45, 230)
             txtPassword.Name = "txtPassword"
-            txtPassword.Size = New Size(416, 31)
+            txtPassword.Size = New Size(333, 27)
             txtPassword.TabIndex = 5
             txtPassword.UseSystemPasswordChar = True
             ' 
@@ -142,10 +135,9 @@ Namespace TokoRotiVB
             chkLoginOwner.Dock = DockStyle.Fill
             chkLoginOwner.Font = New Font("Segoe UI", 9F)
             chkLoginOwner.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            chkLoginOwner.Location = New Point(57, 322)
-            chkLoginOwner.Margin = New Padding(4)
+            chkLoginOwner.Location = New Point(45, 257)
             chkLoginOwner.Name = "chkLoginOwner"
-            chkLoginOwner.Size = New Size(416, 27)
+            chkLoginOwner.Size = New Size(333, 22)
             chkLoginOwner.TabIndex = 6
             chkLoginOwner.Text = "Login as owner"
             chkLoginOwner.UseVisualStyleBackColor = True
@@ -160,10 +152,9 @@ Namespace TokoRotiVB
             btnLogin.FlatStyle = FlatStyle.Flat
             btnLogin.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
             btnLogin.ForeColor = Color.White
-            btnLogin.Location = New Point(57, 357)
-            btnLogin.Margin = New Padding(4)
+            btnLogin.Location = New Point(45, 285)
             btnLogin.Name = "btnLogin"
-            btnLogin.Size = New Size(416, 44)
+            btnLogin.Size = New Size(333, 36)
             btnLogin.TabIndex = 7
             btnLogin.Text = "Masuk"
             btnLogin.UseVisualStyleBackColor = False
@@ -177,27 +168,25 @@ Namespace TokoRotiVB
             tlpMain.Controls.Add(pnlLogin, 1, 1)
             tlpMain.Dock = DockStyle.Fill
             tlpMain.Location = New Point(0, 0)
-            tlpMain.Margin = New Padding(4)
             tlpMain.Name = "tlpMain"
             tlpMain.RowCount = 3
             tlpMain.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
             tlpMain.RowStyles.Add(New RowStyle(SizeType.Percent, 80F))
             tlpMain.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
-            tlpMain.Size = New Size(675, 625)
+            tlpMain.Size = New Size(540, 500)
             tlpMain.TabIndex = 0
             ' 
             ' FrmLogin
             ' 
             AcceptButton = btnLogin
-            AutoScaleDimensions = New SizeF(10F, 25F)
+            AutoScaleDimensions = New SizeF(8F, 20F)
             AutoScaleMode = AutoScaleMode.Font
             BackColor = Color.FromArgb(CByte(245), CByte(247), CByte(250))
-            ClientSize = New Size(675, 625)
+            ClientSize = New Size(540, 500)
             Controls.Add(tlpMain)
             Font = New Font("Segoe UI", 9F)
-            Margin = New Padding(4)
             MaximizeBox = False
-            MinimumSize = New Size(670, 611)
+            MinimumSize = New Size(540, 498)
             Name = "FrmLogin"
             StartPosition = FormStartPosition.CenterScreen
             Text = "Login - Sistem Kasir Toko Roti"

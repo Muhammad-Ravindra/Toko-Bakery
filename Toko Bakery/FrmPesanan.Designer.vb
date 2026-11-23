@@ -20,8 +20,7 @@ Namespace TokoRotiVB
             Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
             lblJudulPesanan = New Label()
-            lblIdPesanan = New Label()
-            txtIdPesanan = New TextBox()
+            grpInfoPesanan = New GroupBox()
             lblPelanggan = New Label()
             cmbPelanggan = New ComboBox()
             lblTanggalPesan = New Label()
@@ -36,6 +35,7 @@ Namespace TokoRotiVB
             cmbStatusPesanan = New ComboBox()
             lblStatusBayar = New Label()
             cmbStatusBayar = New ComboBox()
+            grpPilihProduk = New GroupBox()
             lblProduk = New Label()
             cmbProduk = New ComboBox()
             lblQty = New Label()
@@ -45,13 +45,13 @@ Namespace TokoRotiVB
             lblSubtotal = New Label()
             txtSubtotal = New TextBox()
             btnTambahItem = New Button()
-            btnHapusItem = New Button()
             dgvDetailPesanan = New DataGridView()
             dgvDetailPesanan_id_produkColumn = New DataGridViewTextBoxColumn()
             dgvDetailPesanan_nama_produkColumn = New DataGridViewTextBoxColumn()
             dgvDetailPesanan_qtyColumn = New DataGridViewTextBoxColumn()
             dgvDetailPesanan_harga_satuanColumn = New DataGridViewTextBoxColumn()
             dgvDetailPesanan_subtotalColumn = New DataGridViewTextBoxColumn()
+            grpPembayaran = New GroupBox()
             lblTotal = New Label()
             txtTotal = New TextBox()
             lblDP = New Label()
@@ -60,300 +60,324 @@ Namespace TokoRotiVB
             txtSisa = New TextBox()
             lblCatatan = New Label()
             txtCatatan = New TextBox()
-            btnSimpan = New Button()
+            btnHapusItem = New Button()
             btnBersihkan = New Button()
+            btnSimpan = New Button()
+            grpInfoPesanan.SuspendLayout()
+            grpPilihProduk.SuspendLayout()
             CType(numQty, ISupportInitialize).BeginInit()
             CType(dgvDetailPesanan, ISupportInitialize).BeginInit()
+            grpPembayaran.SuspendLayout()
             CType(numDP, ISupportInitialize).BeginInit()
             SuspendLayout()
             ' 
             ' lblJudulPesanan
             ' 
-            lblJudulPesanan.Font = New Font("Segoe UI", 21F, FontStyle.Bold)
+            lblJudulPesanan.Font = New Font("Segoe UI", 21.0F, FontStyle.Bold)
             lblJudulPesanan.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
-            lblJudulPesanan.Location = New Point(25, 14)
+            lblJudulPesanan.Location = New Point(20, 15)
             lblJudulPesanan.Name = "lblJudulPesanan"
             lblJudulPesanan.Size = New Size(650, 40)
             lblJudulPesanan.TabIndex = 0
             lblJudulPesanan.Text = "Pembuatan Pesanan"
             lblJudulPesanan.TextAlign = ContentAlignment.MiddleLeft
             ' 
-            ' lblIdPesanan
+            ' grpInfoPesanan
             ' 
-            lblIdPesanan.Font = New Font("Segoe UI", 9F)
-            lblIdPesanan.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblIdPesanan.Location = New Point(30, 58)
-            lblIdPesanan.Name = "lblIdPesanan"
-            lblIdPesanan.Size = New Size(150, 22)
-            lblIdPesanan.TabIndex = 1
-            lblIdPesanan.Text = "ID Pesanan"
-            lblIdPesanan.TextAlign = ContentAlignment.MiddleLeft
-            ' 
-            ' txtIdPesanan
-            ' 
-            txtIdPesanan.Location = New Point(30, 82)
-            txtIdPesanan.Name = "txtIdPesanan"
-            txtIdPesanan.ReadOnly = True
-            txtIdPesanan.Size = New Size(150, 27)
-            txtIdPesanan.TabIndex = 2
-            txtIdPesanan.Text = "(otomatis)"
+            grpInfoPesanan.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+            grpInfoPesanan.Controls.Add(lblPelanggan)
+            grpInfoPesanan.Controls.Add(cmbPelanggan)
+            grpInfoPesanan.Controls.Add(lblTanggalPesan)
+            grpInfoPesanan.Controls.Add(dtpTanggalPesan)
+            grpInfoPesanan.Controls.Add(lblTanggalKirim)
+            grpInfoPesanan.Controls.Add(dtpTanggalKirim)
+            grpInfoPesanan.Controls.Add(lblJamKirim)
+            grpInfoPesanan.Controls.Add(dtpJamKirim)
+            grpInfoPesanan.Controls.Add(lblSumber)
+            grpInfoPesanan.Controls.Add(cmbSumber)
+            grpInfoPesanan.Controls.Add(lblStatusPesanan)
+            grpInfoPesanan.Controls.Add(cmbStatusPesanan)
+            grpInfoPesanan.Controls.Add(lblStatusBayar)
+            grpInfoPesanan.Controls.Add(cmbStatusBayar)
+            grpInfoPesanan.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+            grpInfoPesanan.ForeColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
+            grpInfoPesanan.Location = New Point(20, 60)
+            grpInfoPesanan.Name = "grpInfoPesanan"
+            grpInfoPesanan.Size = New Size(1320, 100)
+            grpInfoPesanan.TabIndex = 1
+            grpInfoPesanan.TabStop = False
+            grpInfoPesanan.Text = "Informasi Pesanan"
             ' 
             ' lblPelanggan
             ' 
-            lblPelanggan.Font = New Font("Segoe UI", 9F)
+            lblPelanggan.Font = New Font("Segoe UI", 9.0F)
             lblPelanggan.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblPelanggan.Location = New Point(200, 58)
+            lblPelanggan.Location = New Point(15, 25)
             lblPelanggan.Name = "lblPelanggan"
-            lblPelanggan.Size = New Size(245, 22)
-            lblPelanggan.TabIndex = 3
+            lblPelanggan.Size = New Size(200, 22)
+            lblPelanggan.TabIndex = 0
             lblPelanggan.Text = "Pelanggan"
-            lblPelanggan.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' cmbPelanggan
             ' 
             cmbPelanggan.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            cmbPelanggan.Location = New Point(200, 82)
+            cmbPelanggan.AutoCompleteSource = AutoCompleteSource.ListItems
+            cmbPelanggan.Font = New Font("Segoe UI", 9.0F)
+            cmbPelanggan.Location = New Point(15, 50)
             cmbPelanggan.Name = "cmbPelanggan"
-            cmbPelanggan.Size = New Size(245, 28)
-            cmbPelanggan.TabIndex = 4
+            cmbPelanggan.Size = New Size(200, 28)
+            cmbPelanggan.TabIndex = 1
             ' 
             ' lblTanggalPesan
             ' 
-            lblTanggalPesan.Font = New Font("Segoe UI", 9F)
+            lblTanggalPesan.Font = New Font("Segoe UI", 9.0F)
             lblTanggalPesan.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblTanggalPesan.Location = New Point(465, 58)
+            lblTanggalPesan.Location = New Point(230, 25)
             lblTanggalPesan.Name = "lblTanggalPesan"
-            lblTanggalPesan.Size = New Size(175, 22)
-            lblTanggalPesan.TabIndex = 5
+            lblTanggalPesan.Size = New Size(120, 22)
+            lblTanggalPesan.TabIndex = 2
             lblTanggalPesan.Text = "Tanggal Pesan"
-            lblTanggalPesan.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' dtpTanggalPesan
             ' 
+            dtpTanggalPesan.Font = New Font("Segoe UI", 9.0F)
             dtpTanggalPesan.Format = DateTimePickerFormat.Short
-            dtpTanggalPesan.Location = New Point(465, 82)
+            dtpTanggalPesan.Location = New Point(230, 50)
             dtpTanggalPesan.Name = "dtpTanggalPesan"
-            dtpTanggalPesan.Size = New Size(175, 27)
-            dtpTanggalPesan.TabIndex = 6
+            dtpTanggalPesan.Size = New Size(120, 27)
+            dtpTanggalPesan.TabIndex = 3
             ' 
             ' lblTanggalKirim
             ' 
-            lblTanggalKirim.Font = New Font("Segoe UI", 9F)
+            lblTanggalKirim.Font = New Font("Segoe UI", 9.0F)
             lblTanggalKirim.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblTanggalKirim.Location = New Point(660, 58)
+            lblTanggalKirim.Location = New Point(365, 25)
             lblTanggalKirim.Name = "lblTanggalKirim"
-            lblTanggalKirim.Size = New Size(175, 22)
-            lblTanggalKirim.TabIndex = 7
-            lblTanggalKirim.Text = "Tanggal Kirim (opsional)"
-            lblTanggalKirim.TextAlign = ContentAlignment.MiddleLeft
+            lblTanggalKirim.Size = New Size(120, 22)
+            lblTanggalKirim.TabIndex = 4
+            lblTanggalKirim.Text = "Tanggal Kirim"
             ' 
             ' dtpTanggalKirim
             ' 
+            dtpTanggalKirim.Font = New Font("Segoe UI", 9.0F)
             dtpTanggalKirim.Format = DateTimePickerFormat.Short
-            dtpTanggalKirim.Location = New Point(660, 82)
+            dtpTanggalKirim.Location = New Point(365, 50)
             dtpTanggalKirim.Name = "dtpTanggalKirim"
-            dtpTanggalKirim.ShowCheckBox = True
-            dtpTanggalKirim.Size = New Size(175, 27)
-            dtpTanggalKirim.TabIndex = 8
+            dtpTanggalKirim.Size = New Size(120, 27)
+            dtpTanggalKirim.TabIndex = 5
             ' 
             ' lblJamKirim
             ' 
-            lblJamKirim.Font = New Font("Segoe UI", 9F)
+            lblJamKirim.Font = New Font("Segoe UI", 9.0F)
             lblJamKirim.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblJamKirim.Location = New Point(855, 58)
+            lblJamKirim.Location = New Point(500, 25)
             lblJamKirim.Name = "lblJamKirim"
-            lblJamKirim.Size = New Size(130, 22)
-            lblJamKirim.TabIndex = 9
+            lblJamKirim.Size = New Size(80, 22)
+            lblJamKirim.TabIndex = 6
             lblJamKirim.Text = "Jam Kirim"
-            lblJamKirim.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' dtpJamKirim
             ' 
             dtpJamKirim.CustomFormat = "HH:mm"
+            dtpJamKirim.Font = New Font("Segoe UI", 9.0F)
             dtpJamKirim.Format = DateTimePickerFormat.Custom
-            dtpJamKirim.Location = New Point(855, 82)
+            dtpJamKirim.ImeMode = ImeMode.Off
+            dtpJamKirim.Location = New Point(500, 50)
             dtpJamKirim.Name = "dtpJamKirim"
-            dtpJamKirim.ShowCheckBox = True
             dtpJamKirim.ShowUpDown = True
-            dtpJamKirim.Size = New Size(130, 27)
-            dtpJamKirim.TabIndex = 10
+            dtpJamKirim.Size = New Size(80, 27)
+            dtpJamKirim.TabIndex = 7
             ' 
             ' lblSumber
             ' 
-            lblSumber.Font = New Font("Segoe UI", 9F)
+            lblSumber.Font = New Font("Segoe UI", 9.0F)
             lblSumber.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblSumber.Location = New Point(1005, 58)
+            lblSumber.Location = New Point(600, 25)
             lblSumber.Name = "lblSumber"
-            lblSumber.Size = New Size(150, 22)
-            lblSumber.TabIndex = 11
+            lblSumber.Size = New Size(120, 22)
+            lblSumber.TabIndex = 8
             lblSumber.Text = "Sumber Pesanan"
-            lblSumber.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' cmbSumber
             ' 
+            cmbSumber.Font = New Font("Segoe UI", 9.0F)
             cmbSumber.Items.AddRange(New Object() {"WA", "Telepon", "Langsung", "Lainnya"})
-            cmbSumber.Location = New Point(1005, 82)
+            cmbSumber.Location = New Point(600, 50)
             cmbSumber.Name = "cmbSumber"
-            cmbSumber.Size = New Size(150, 28)
-            cmbSumber.TabIndex = 12
+            cmbSumber.Size = New Size(120, 28)
+            cmbSumber.TabIndex = 9
             ' 
             ' lblStatusPesanan
             ' 
-            lblStatusPesanan.Font = New Font("Segoe UI", 9F)
+            lblStatusPesanan.Font = New Font("Segoe UI", 9.0F)
             lblStatusPesanan.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblStatusPesanan.Location = New Point(30, 125)
+            lblStatusPesanan.Location = New Point(740, 25)
             lblStatusPesanan.Name = "lblStatusPesanan"
-            lblStatusPesanan.Size = New Size(170, 22)
-            lblStatusPesanan.TabIndex = 13
+            lblStatusPesanan.Size = New Size(120, 22)
+            lblStatusPesanan.TabIndex = 10
             lblStatusPesanan.Text = "Status Pesanan"
-            lblStatusPesanan.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' cmbStatusPesanan
             ' 
             cmbStatusPesanan.DropDownStyle = ComboBoxStyle.DropDownList
+            cmbStatusPesanan.Font = New Font("Segoe UI", 9.0F)
             cmbStatusPesanan.Items.AddRange(New Object() {"BARU", "DIPROSES", "SELESAI"})
-            cmbStatusPesanan.Location = New Point(30, 149)
+            cmbStatusPesanan.Location = New Point(740, 50)
             cmbStatusPesanan.Name = "cmbStatusPesanan"
-            cmbStatusPesanan.Size = New Size(170, 28)
-            cmbStatusPesanan.TabIndex = 14
+            cmbStatusPesanan.Size = New Size(120, 28)
+            cmbStatusPesanan.TabIndex = 11
             ' 
             ' lblStatusBayar
             ' 
-            lblStatusBayar.Font = New Font("Segoe UI", 9F)
+            lblStatusBayar.Font = New Font("Segoe UI", 9.0F)
             lblStatusBayar.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblStatusBayar.Location = New Point(220, 125)
+            lblStatusBayar.Location = New Point(880, 25)
             lblStatusBayar.Name = "lblStatusBayar"
-            lblStatusBayar.Size = New Size(170, 22)
-            lblStatusBayar.TabIndex = 15
-            lblStatusBayar.Text = "Status Pembayaran (otomatis)"
-            lblStatusBayar.TextAlign = ContentAlignment.MiddleLeft
+            lblStatusBayar.Size = New Size(130, 22)
+            lblStatusBayar.TabIndex = 12
+            lblStatusBayar.Text = "Status Pembayaran"
             ' 
             ' cmbStatusBayar
             ' 
             cmbStatusBayar.DropDownStyle = ComboBoxStyle.DropDownList
             cmbStatusBayar.Enabled = False
+            cmbStatusBayar.Font = New Font("Segoe UI", 9.0F)
             cmbStatusBayar.Items.AddRange(New Object() {"BELUM", "DP", "LUNAS"})
-            cmbStatusBayar.Location = New Point(220, 149)
+            cmbStatusBayar.Location = New Point(880, 50)
             cmbStatusBayar.Name = "cmbStatusBayar"
-            cmbStatusBayar.Size = New Size(170, 28)
-            cmbStatusBayar.TabIndex = 16
+            cmbStatusBayar.Size = New Size(130, 28)
+            cmbStatusBayar.TabIndex = 13
+            ' 
+            ' grpPilihProduk
+            ' 
+            grpPilihProduk.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
+            grpPilihProduk.Controls.Add(lblProduk)
+            grpPilihProduk.Controls.Add(cmbProduk)
+            grpPilihProduk.Controls.Add(lblQty)
+            grpPilihProduk.Controls.Add(numQty)
+            grpPilihProduk.Controls.Add(lblHarga)
+            grpPilihProduk.Controls.Add(txtHarga)
+            grpPilihProduk.Controls.Add(lblSubtotal)
+            grpPilihProduk.Controls.Add(txtSubtotal)
+            grpPilihProduk.Controls.Add(btnTambahItem)
+            grpPilihProduk.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+            grpPilihProduk.ForeColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
+            grpPilihProduk.Location = New Point(20, 175)
+            grpPilihProduk.Name = "grpPilihProduk"
+            grpPilihProduk.Size = New Size(360, 200)
+            grpPilihProduk.TabIndex = 2
+            grpPilihProduk.TabStop = False
+            grpPilihProduk.Text = "Pilih Produk"
             ' 
             ' lblProduk
             ' 
-            lblProduk.Font = New Font("Segoe UI", 9F)
+            lblProduk.Font = New Font("Segoe UI", 9.0F)
             lblProduk.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblProduk.Location = New Point(410, 125)
+            lblProduk.Location = New Point(15, 25)
             lblProduk.Name = "lblProduk"
-            lblProduk.Size = New Size(255, 22)
-            lblProduk.TabIndex = 17
-            lblProduk.Text = "Produk"
-            lblProduk.TextAlign = ContentAlignment.MiddleLeft
+            lblProduk.Size = New Size(330, 22)
+            lblProduk.TabIndex = 0
+            lblProduk.Text = "Nama Produk"
             ' 
             ' cmbProduk
             ' 
             cmbProduk.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            cmbProduk.Location = New Point(410, 149)
+            cmbProduk.AutoCompleteSource = AutoCompleteSource.ListItems
+            cmbProduk.Font = New Font("Segoe UI", 9.0F)
+            cmbProduk.Location = New Point(15, 50)
             cmbProduk.Name = "cmbProduk"
-            cmbProduk.Size = New Size(255, 28)
-            cmbProduk.TabIndex = 18
+            cmbProduk.Size = New Size(330, 28)
+            cmbProduk.TabIndex = 1
             ' 
             ' lblQty
             ' 
-            lblQty.Font = New Font("Segoe UI", 9F)
+            lblQty.Font = New Font("Segoe UI", 9.0F)
             lblQty.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblQty.Location = New Point(685, 125)
+            lblQty.Location = New Point(15, 90)
             lblQty.Name = "lblQty"
             lblQty.Size = New Size(75, 22)
-            lblQty.TabIndex = 19
+            lblQty.TabIndex = 2
             lblQty.Text = "Jumlah"
-            lblQty.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' numQty
             ' 
-            numQty.Location = New Point(685, 149)
+            numQty.Font = New Font("Segoe UI", 9.0F)
+            numQty.Location = New Point(15, 115)
             numQty.Maximum = New Decimal(New Integer() {1000000, 0, 0, 65536})
-            numQty.Minimum = New Decimal(New Integer() {10, 0, 0, 65536})
+            numQty.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
             numQty.Name = "numQty"
             numQty.Size = New Size(75, 27)
-            numQty.TabIndex = 20
+            numQty.TabIndex = 3
             numQty.ThousandsSeparator = True
-            numQty.Value = New Decimal(New Integer() {10, 0, 0, 65536})
+            numQty.Value = New Decimal(New Integer() {1, 0, 0, 0})
             ' 
             ' lblHarga
             ' 
-            lblHarga.Font = New Font("Segoe UI", 9F)
+            lblHarga.Font = New Font("Segoe UI", 9.0F)
             lblHarga.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblHarga.Location = New Point(780, 125)
+            lblHarga.Location = New Point(105, 90)
             lblHarga.Name = "lblHarga"
-            lblHarga.Size = New Size(150, 22)
-            lblHarga.TabIndex = 21
-            lblHarga.Text = "Harga Satuan (Rp)"
-            lblHarga.TextAlign = ContentAlignment.MiddleLeft
+            lblHarga.Size = New Size(110, 22)
+            lblHarga.TabIndex = 4
+            lblHarga.Text = "Harga (Rp)"
             ' 
             ' txtHarga
             ' 
-            txtHarga.Location = New Point(780, 149)
+            txtHarga.BackColor = SystemColors.Window
+            txtHarga.BorderStyle = BorderStyle.FixedSingle
+            txtHarga.Font = New Font("Segoe UI", 9.0F)
+            txtHarga.Location = New Point(105, 115)
             txtHarga.Name = "txtHarga"
             txtHarga.ReadOnly = True
-            txtHarga.Size = New Size(150, 27)
-            txtHarga.TabIndex = 22
+            txtHarga.Size = New Size(110, 27)
+            txtHarga.TabIndex = 5
             ' 
             ' lblSubtotal
             ' 
-            lblSubtotal.Font = New Font("Segoe UI", 9F)
+            lblSubtotal.Font = New Font("Segoe UI", 9.0F)
             lblSubtotal.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblSubtotal.Location = New Point(950, 125)
+            lblSubtotal.Location = New Point(230, 90)
             lblSubtotal.Name = "lblSubtotal"
-            lblSubtotal.Size = New Size(150, 22)
-            lblSubtotal.TabIndex = 23
+            lblSubtotal.Size = New Size(115, 22)
+            lblSubtotal.TabIndex = 6
             lblSubtotal.Text = "Subtotal (Rp)"
-            lblSubtotal.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' txtSubtotal
             ' 
-            txtSubtotal.Location = New Point(950, 149)
+            txtSubtotal.BackColor = SystemColors.Window
+            txtSubtotal.BorderStyle = BorderStyle.FixedSingle
+            txtSubtotal.Font = New Font("Segoe UI", 9.0F)
+            txtSubtotal.Location = New Point(230, 115)
             txtSubtotal.Name = "txtSubtotal"
             txtSubtotal.ReadOnly = True
-            txtSubtotal.Size = New Size(150, 27)
-            txtSubtotal.TabIndex = 24
+            txtSubtotal.Size = New Size(115, 27)
+            txtSubtotal.TabIndex = 7
             ' 
             ' btnTambahItem
             ' 
             btnTambahItem.BackColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
             btnTambahItem.Cursor = Cursors.Hand
             btnTambahItem.FlatStyle = FlatStyle.Flat
-            btnTambahItem.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+            btnTambahItem.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
             btnTambahItem.ForeColor = Color.White
-            btnTambahItem.Location = New Point(1120, 145)
+            btnTambahItem.Location = New Point(15, 155)
             btnTambahItem.Name = "btnTambahItem"
-            btnTambahItem.Size = New Size(115, 36)
-            btnTambahItem.TabIndex = 25
-            btnTambahItem.Text = "Tambah Item"
+            btnTambahItem.Size = New Size(330, 35)
+            btnTambahItem.TabIndex = 8
+            btnTambahItem.Text = "+ Tambah Item ke Keranjang"
             btnTambahItem.UseVisualStyleBackColor = False
-            ' 
-            ' btnHapusItem
-            ' 
-            btnHapusItem.BackColor = Color.FromArgb(CByte(224), CByte(235), CByte(246))
-            btnHapusItem.Cursor = Cursors.Hand
-            btnHapusItem.FlatStyle = FlatStyle.Flat
-            btnHapusItem.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
-            btnHapusItem.Location = New Point(1245, 145)
-            btnHapusItem.Name = "btnHapusItem"
-            btnHapusItem.Size = New Size(110, 36)
-            btnHapusItem.TabIndex = 26
-            btnHapusItem.Text = "Hapus Item"
-            btnHapusItem.UseVisualStyleBackColor = False
             ' 
             ' dgvDetailPesanan
             ' 
             dgvDetailPesanan.AllowUserToAddRows = False
             dgvDetailPesanan.AllowUserToDeleteRows = False
             dgvDetailPesanan.AllowUserToResizeRows = False
+            dgvDetailPesanan.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
             dgvDetailPesanan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             dgvDetailPesanan.BackgroundColor = Color.White
             DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
-            DataGridViewCellStyle1.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+            DataGridViewCellStyle1.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
             DataGridViewCellStyle1.ForeColor = Color.White
             DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
             DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
@@ -363,30 +387,31 @@ Namespace TokoRotiVB
             dgvDetailPesanan.Columns.AddRange(New DataGridViewColumn() {dgvDetailPesanan_id_produkColumn, dgvDetailPesanan_nama_produkColumn, dgvDetailPesanan_qtyColumn, dgvDetailPesanan_harga_satuanColumn, dgvDetailPesanan_subtotalColumn})
             DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle2.BackColor = SystemColors.Window
-            DataGridViewCellStyle2.Font = New Font("Segoe UI", 9F)
+            DataGridViewCellStyle2.Font = New Font("Segoe UI", 9.0F)
             DataGridViewCellStyle2.ForeColor = SystemColors.ControlText
             DataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(CByte(214), CByte(231), CByte(247))
             DataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(CByte(40), CByte(49), CByte(59))
             DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
             dgvDetailPesanan.DefaultCellStyle = DataGridViewCellStyle2
             dgvDetailPesanan.EnableHeadersVisualStyles = False
-            dgvDetailPesanan.Location = New Point(30, 200)
+            dgvDetailPesanan.Location = New Point(400, 175)
             dgvDetailPesanan.MultiSelect = False
             dgvDetailPesanan.Name = "dgvDetailPesanan"
             dgvDetailPesanan.ReadOnly = True
             dgvDetailPesanan.RowHeadersVisible = False
             dgvDetailPesanan.RowHeadersWidth = 51
             dgvDetailPesanan.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            dgvDetailPesanan.Size = New Size(1325, 330)
-            dgvDetailPesanan.TabIndex = 27
+            dgvDetailPesanan.Size = New Size(940, 380)
+            dgvDetailPesanan.TabIndex = 3
             ' 
             ' dgvDetailPesanan_id_produkColumn
             ' 
             dgvDetailPesanan_id_produkColumn.DataPropertyName = "id_produk"
-            dgvDetailPesanan_id_produkColumn.HeaderText = "ID Produk"
+            dgvDetailPesanan_id_produkColumn.HeaderText = "ID"
             dgvDetailPesanan_id_produkColumn.MinimumWidth = 6
             dgvDetailPesanan_id_produkColumn.Name = "dgvDetailPesanan_id_produkColumn"
             dgvDetailPesanan_id_produkColumn.ReadOnly = True
+            dgvDetailPesanan_id_produkColumn.Visible = False
             ' 
             ' dgvDetailPesanan_nama_produkColumn
             ' 
@@ -420,172 +445,185 @@ Namespace TokoRotiVB
             dgvDetailPesanan_subtotalColumn.Name = "dgvDetailPesanan_subtotalColumn"
             dgvDetailPesanan_subtotalColumn.ReadOnly = True
             ' 
+            ' grpPembayaran
+            ' 
+            grpPembayaran.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            grpPembayaran.Controls.Add(lblTotal)
+            grpPembayaran.Controls.Add(txtTotal)
+            grpPembayaran.Controls.Add(lblDP)
+            grpPembayaran.Controls.Add(numDP)
+            grpPembayaran.Controls.Add(lblSisa)
+            grpPembayaran.Controls.Add(txtSisa)
+            grpPembayaran.Controls.Add(lblCatatan)
+            grpPembayaran.Controls.Add(txtCatatan)
+            grpPembayaran.Controls.Add(btnHapusItem)
+            grpPembayaran.Controls.Add(btnBersihkan)
+            grpPembayaran.Controls.Add(btnSimpan)
+            grpPembayaran.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+            grpPembayaran.ForeColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
+            grpPembayaran.Location = New Point(20, 570)
+            grpPembayaran.Name = "grpPembayaran"
+            grpPembayaran.Size = New Size(1320, 180)
+            grpPembayaran.TabIndex = 4
+            grpPembayaran.TabStop = False
+            grpPembayaran.Text = "Pembayaran & Penyelesaian"
+            ' 
             ' lblTotal
             ' 
-            lblTotal.Font = New Font("Segoe UI", 9F)
+            lblTotal.Font = New Font("Segoe UI", 9.0F)
             lblTotal.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblTotal.Location = New Point(30, 545)
+            lblTotal.Location = New Point(15, 25)
             lblTotal.Name = "lblTotal"
-            lblTotal.Size = New Size(190, 22)
-            lblTotal.TabIndex = 28
+            lblTotal.Size = New Size(150, 22)
+            lblTotal.TabIndex = 0
             lblTotal.Text = "Total Pesanan (Rp)"
-            lblTotal.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' txtTotal
             ' 
-            txtTotal.Location = New Point(30, 569)
+            txtTotal.BackColor = Color.FromArgb(CByte(224), CByte(235), CByte(246))
+            txtTotal.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+            txtTotal.Location = New Point(15, 50)
             txtTotal.Name = "txtTotal"
             txtTotal.ReadOnly = True
-            txtTotal.Size = New Size(190, 27)
-            txtTotal.TabIndex = 29
-            txtTotal.Text = "0.00"
+            txtTotal.Size = New Size(150, 27)
+            txtTotal.TabIndex = 1
+            txtTotal.Text = "0"
             ' 
             ' lblDP
             ' 
-            lblDP.Font = New Font("Segoe UI", 9F)
+            lblDP.Font = New Font("Segoe UI", 9.0F)
             lblDP.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblDP.Location = New Point(255, 545)
+            lblDP.Location = New Point(180, 25)
             lblDP.Name = "lblDP"
-            lblDP.Size = New Size(190, 22)
-            lblDP.TabIndex = 30
+            lblDP.Size = New Size(150, 22)
+            lblDP.TabIndex = 2
             lblDP.Text = "Uang Muka / DP (Rp)"
-            lblDP.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' numDP
             ' 
-            numDP.DecimalPlaces = 2
-            numDP.Location = New Point(255, 569)
-            numDP.Maximum = New Decimal(New Integer() {-727379969, 232, 0, 131072})
+            numDP.Font = New Font("Segoe UI", 9.0F)
+            numDP.Location = New Point(180, 50)
+            numDP.Maximum = New Decimal(New Integer() {999999999, 0, 0, 0})
             numDP.Name = "numDP"
-            numDP.Size = New Size(190, 27)
-            numDP.TabIndex = 31
+            numDP.Size = New Size(150, 27)
+            numDP.TabIndex = 3
             numDP.ThousandsSeparator = True
             ' 
             ' lblSisa
             ' 
-            lblSisa.Font = New Font("Segoe UI", 9F)
+            lblSisa.Font = New Font("Segoe UI", 9.0F)
             lblSisa.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblSisa.Location = New Point(480, 545)
+            lblSisa.Location = New Point(345, 25)
             lblSisa.Name = "lblSisa"
-            lblSisa.Size = New Size(190, 22)
-            lblSisa.TabIndex = 32
+            lblSisa.Size = New Size(150, 22)
+            lblSisa.TabIndex = 4
             lblSisa.Text = "Sisa Tagihan (Rp)"
-            lblSisa.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' txtSisa
             ' 
-            txtSisa.Location = New Point(480, 569)
+            txtSisa.BackColor = Color.FromArgb(CByte(245), CByte(247), CByte(250))
+            txtSisa.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+            txtSisa.ForeColor = Color.Red
+            txtSisa.Location = New Point(345, 50)
             txtSisa.Name = "txtSisa"
             txtSisa.ReadOnly = True
-            txtSisa.Size = New Size(190, 27)
-            txtSisa.TabIndex = 33
-            txtSisa.Text = "0.00"
+            txtSisa.Size = New Size(150, 27)
+            txtSisa.TabIndex = 5
+            txtSisa.Text = "0"
             ' 
             ' lblCatatan
             ' 
-            lblCatatan.Font = New Font("Segoe UI", 9F)
+            lblCatatan.Font = New Font("Segoe UI", 9.0F)
             lblCatatan.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
-            lblCatatan.Location = New Point(30, 620)
+            lblCatatan.Location = New Point(15, 85)
             lblCatatan.Name = "lblCatatan"
-            lblCatatan.Size = New Size(700, 22)
-            lblCatatan.TabIndex = 34
+            lblCatatan.Size = New Size(480, 22)
+            lblCatatan.TabIndex = 6
             lblCatatan.Text = "Catatan Pesanan"
-            lblCatatan.TextAlign = ContentAlignment.MiddleLeft
             ' 
             ' txtCatatan
             ' 
-            txtCatatan.Location = New Point(30, 644)
+            txtCatatan.Font = New Font("Segoe UI", 9.0F)
+            txtCatatan.Location = New Point(15, 110)
             txtCatatan.Multiline = True
             txtCatatan.Name = "txtCatatan"
             txtCatatan.ScrollBars = ScrollBars.Vertical
-            txtCatatan.Size = New Size(850, 70)
-            txtCatatan.TabIndex = 35
+            txtCatatan.Size = New Size(480, 55)
+            txtCatatan.TabIndex = 7
             ' 
-            ' btnSimpan
+            ' btnHapusItem
             ' 
-            btnSimpan.BackColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
-            btnSimpan.Cursor = Cursors.Hand
-            btnSimpan.FlatStyle = FlatStyle.Flat
-            btnSimpan.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-            btnSimpan.ForeColor = Color.White
-            btnSimpan.Location = New Point(1030, 660)
-            btnSimpan.Name = "btnSimpan"
-            btnSimpan.Size = New Size(145, 44)
-            btnSimpan.TabIndex = 36
-            btnSimpan.Text = "Simpan Pesanan"
-            btnSimpan.UseVisualStyleBackColor = False
+            btnHapusItem.BackColor = Color.FromArgb(CByte(224), CByte(235), CByte(246))
+            btnHapusItem.Cursor = Cursors.Hand
+            btnHapusItem.FlatStyle = FlatStyle.Flat
+            btnHapusItem.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+            btnHapusItem.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
+            btnHapusItem.Location = New Point(515, 105)
+            btnHapusItem.Name = "btnHapusItem"
+            btnHapusItem.Size = New Size(125, 40)
+            btnHapusItem.TabIndex = 8
+            btnHapusItem.Text = "Hapus Item"
+            btnHapusItem.UseVisualStyleBackColor = False
             ' 
             ' btnBersihkan
             ' 
+            btnBersihkan.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
             btnBersihkan.BackColor = Color.FromArgb(CByte(224), CByte(235), CByte(246))
             btnBersihkan.Cursor = Cursors.Hand
             btnBersihkan.FlatStyle = FlatStyle.Flat
+            btnBersihkan.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
             btnBersihkan.ForeColor = Color.FromArgb(CByte(31), CByte(47), CByte(70))
-            btnBersihkan.Location = New Point(1190, 660)
+            btnBersihkan.Location = New Point(1020, 105)
             btnBersihkan.Name = "btnBersihkan"
-            btnBersihkan.Size = New Size(145, 44)
-            btnBersihkan.TabIndex = 37
+            btnBersihkan.Size = New Size(140, 40)
+            btnBersihkan.TabIndex = 9
             btnBersihkan.Text = "Bersihkan"
             btnBersihkan.UseVisualStyleBackColor = False
             ' 
+            ' btnSimpan
+            ' 
+            btnSimpan.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+            btnSimpan.BackColor = Color.FromArgb(CByte(43), CByte(94), CByte(142))
+            btnSimpan.Cursor = Cursors.Hand
+            btnSimpan.FlatStyle = FlatStyle.Flat
+            btnSimpan.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+            btnSimpan.ForeColor = Color.White
+            btnSimpan.Location = New Point(1170, 105)
+            btnSimpan.Name = "btnSimpan"
+            btnSimpan.Size = New Size(135, 40)
+            btnSimpan.TabIndex = 10
+            btnSimpan.Text = "Simpan Pesanan"
+            btnSimpan.UseVisualStyleBackColor = False
+            ' 
             ' FrmPesanan
             ' 
-            AutoScaleDimensions = New SizeF(8F, 20F)
+            AutoScaleDimensions = New SizeF(8.0F, 20.0F)
             AutoScaleMode = AutoScaleMode.Font
             BackColor = Color.FromArgb(CByte(245), CByte(247), CByte(250))
-            ClientSize = New Size(1380, 820)
-            Controls.Add(lblJudulPesanan)
-            Controls.Add(lblIdPesanan)
-            Controls.Add(txtIdPesanan)
-            Controls.Add(lblPelanggan)
-            Controls.Add(cmbPelanggan)
-            Controls.Add(lblTanggalPesan)
-            Controls.Add(dtpTanggalPesan)
-            Controls.Add(lblTanggalKirim)
-            Controls.Add(dtpTanggalKirim)
-            Controls.Add(lblJamKirim)
-            Controls.Add(dtpJamKirim)
-            Controls.Add(lblSumber)
-            Controls.Add(cmbSumber)
-            Controls.Add(lblStatusPesanan)
-            Controls.Add(cmbStatusPesanan)
-            Controls.Add(lblStatusBayar)
-            Controls.Add(cmbStatusBayar)
-            Controls.Add(lblProduk)
-            Controls.Add(cmbProduk)
-            Controls.Add(lblQty)
-            Controls.Add(numQty)
-            Controls.Add(lblHarga)
-            Controls.Add(txtHarga)
-            Controls.Add(lblSubtotal)
-            Controls.Add(txtSubtotal)
-            Controls.Add(btnTambahItem)
-            Controls.Add(btnHapusItem)
+            ClientSize = New Size(1360, 770)
+            Controls.Add(grpPembayaran)
             Controls.Add(dgvDetailPesanan)
-            Controls.Add(lblTotal)
-            Controls.Add(txtTotal)
-            Controls.Add(lblDP)
-            Controls.Add(numDP)
-            Controls.Add(lblSisa)
-            Controls.Add(txtSisa)
-            Controls.Add(lblCatatan)
-            Controls.Add(txtCatatan)
-            Controls.Add(btnSimpan)
-            Controls.Add(btnBersihkan)
-            Font = New Font("Segoe UI", 9F)
+            Controls.Add(grpPilihProduk)
+            Controls.Add(grpInfoPesanan)
+            Controls.Add(lblJudulPesanan)
+            Font = New Font("Segoe UI", 9.0F)
+            MinimumSize = New Size(1200, 700)
             Name = "FrmPesanan"
             StartPosition = FormStartPosition.CenterScreen
             Text = "Pemesanan - Sistem Kasir Toko Roti"
+            grpInfoPesanan.ResumeLayout(False)
+            grpPilihProduk.ResumeLayout(False)
+            grpPilihProduk.PerformLayout()
             CType(numQty, ISupportInitialize).EndInit()
             CType(dgvDetailPesanan, ISupportInitialize).EndInit()
+            grpPembayaran.ResumeLayout(False)
+            grpPembayaran.PerformLayout()
             CType(numDP, ISupportInitialize).EndInit()
             ResumeLayout(False)
-            PerformLayout()
         End Sub
 
         Friend WithEvents lblJudulPesanan As System.Windows.Forms.Label
-        Friend WithEvents lblIdPesanan As System.Windows.Forms.Label
-        Friend WithEvents txtIdPesanan As System.Windows.Forms.TextBox
+        Friend WithEvents grpInfoPesanan As System.Windows.Forms.GroupBox
         Friend WithEvents lblPelanggan As System.Windows.Forms.Label
         Friend WithEvents cmbPelanggan As System.Windows.Forms.ComboBox
         Friend WithEvents lblTanggalPesan As System.Windows.Forms.Label
@@ -600,6 +638,7 @@ Namespace TokoRotiVB
         Friend WithEvents cmbStatusPesanan As System.Windows.Forms.ComboBox
         Friend WithEvents lblStatusBayar As System.Windows.Forms.Label
         Friend WithEvents cmbStatusBayar As System.Windows.Forms.ComboBox
+        Friend WithEvents grpPilihProduk As System.Windows.Forms.GroupBox
         Friend WithEvents lblProduk As System.Windows.Forms.Label
         Friend WithEvents cmbProduk As System.Windows.Forms.ComboBox
         Friend WithEvents lblQty As System.Windows.Forms.Label
@@ -609,8 +648,13 @@ Namespace TokoRotiVB
         Friend WithEvents lblSubtotal As System.Windows.Forms.Label
         Friend WithEvents txtSubtotal As System.Windows.Forms.TextBox
         Friend WithEvents btnTambahItem As System.Windows.Forms.Button
-        Friend WithEvents btnHapusItem As System.Windows.Forms.Button
         Friend WithEvents dgvDetailPesanan As System.Windows.Forms.DataGridView
+        Friend WithEvents dgvDetailPesanan_id_produkColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents dgvDetailPesanan_nama_produkColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents dgvDetailPesanan_qtyColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents dgvDetailPesanan_harga_satuanColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents dgvDetailPesanan_subtotalColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents grpPembayaran As System.Windows.Forms.GroupBox
         Friend WithEvents lblTotal As System.Windows.Forms.Label
         Friend WithEvents txtTotal As System.Windows.Forms.TextBox
         Friend WithEvents lblDP As System.Windows.Forms.Label
@@ -619,12 +663,8 @@ Namespace TokoRotiVB
         Friend WithEvents txtSisa As System.Windows.Forms.TextBox
         Friend WithEvents lblCatatan As System.Windows.Forms.Label
         Friend WithEvents txtCatatan As System.Windows.Forms.TextBox
-        Friend WithEvents btnSimpan As System.Windows.Forms.Button
+        Friend WithEvents btnHapusItem As System.Windows.Forms.Button
         Friend WithEvents btnBersihkan As System.Windows.Forms.Button
-        Friend WithEvents dgvDetailPesanan_id_produkColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvDetailPesanan_nama_produkColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvDetailPesanan_qtyColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvDetailPesanan_harga_satuanColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvDetailPesanan_subtotalColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents btnSimpan As System.Windows.Forms.Button
     End Class
 End Namespace
