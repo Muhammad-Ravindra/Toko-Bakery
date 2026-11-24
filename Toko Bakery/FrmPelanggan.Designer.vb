@@ -33,6 +33,10 @@ Namespace TokoRotiVB
             dgvPelanggan = New DataGridView()
             Label1 = New Label()
             txtAlamat = New TextBox()
+            lblEmail = New Label()
+            txtEmail = New TextBox()
+            lblNoHp = New Label()
+            txtNoHp = New TextBox()
             CType(numTermin, ISupportInitialize).BeginInit()
             CType(dgvPelanggan, ISupportInitialize).BeginInit()
             SuspendLayout()
@@ -218,13 +222,55 @@ Namespace TokoRotiVB
             txtAlamat.Name = "txtAlamat"
             txtAlamat.Size = New Size(549, 27)
             txtAlamat.TabIndex = 17
-            ' 
+            '
+            ' lblEmail
+            '
+            lblEmail.Font = New Font("Segoe UI", 9F)
+            lblEmail.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
+            lblEmail.Location = New Point(30, 232)
+            lblEmail.Name = "lblEmail"
+            lblEmail.Size = New Size(230, 22)
+            lblEmail.TabIndex = 18
+            lblEmail.Text = "Email"
+            lblEmail.TextAlign = ContentAlignment.MiddleLeft
+            '
+            ' txtEmail
+            '
+            txtEmail.Location = New Point(30, 257)
+            txtEmail.MaxLength = 100
+            txtEmail.Name = "txtEmail"
+            txtEmail.Size = New Size(230, 27)
+            txtEmail.TabIndex = 19
+            '
+            ' lblNoHp
+            '
+            lblNoHp.Font = New Font("Segoe UI", 9F)
+            lblNoHp.ForeColor = Color.FromArgb(CByte(45), CByte(55), CByte(65))
+            lblNoHp.Location = New Point(290, 232)
+            lblNoHp.Name = "lblNoHp"
+            lblNoHp.Size = New Size(170, 22)
+            lblNoHp.TabIndex = 20
+            lblNoHp.Text = "No. HP"
+            lblNoHp.TextAlign = ContentAlignment.MiddleLeft
+            '
+            ' txtNoHp
+            '
+            txtNoHp.Location = New Point(290, 257)
+            txtNoHp.MaxLength = 20
+            txtNoHp.Name = "txtNoHp"
+            txtNoHp.Size = New Size(170, 27)
+            txtNoHp.TabIndex = 21
+            '
             ' FrmPelanggan
             ' 
             AutoScaleDimensions = New SizeF(8F, 20F)
             AutoScaleMode = AutoScaleMode.Font
             BackColor = Color.FromArgb(CByte(245), CByte(247), CByte(250))
             ClientSize = New Size(1120, 720)
+            Controls.Add(txtNoHp)
+            Controls.Add(lblNoHp)
+            Controls.Add(txtEmail)
+            Controls.Add(lblEmail)
             Controls.Add(txtAlamat)
             Controls.Add(Label1)
             Controls.Add(lblJudulPelanggan)
@@ -263,5 +309,9 @@ Namespace TokoRotiVB
         Friend WithEvents dgvPelanggan As System.Windows.Forms.DataGridView
         Friend WithEvents Label1 As Label
         Friend WithEvents txtAlamat As TextBox
+        Friend WithEvents lblEmail As Label
+        Friend WithEvents txtEmail As TextBox
+        Friend WithEvents lblNoHp As Label
+        Friend WithEvents txtNoHp As TextBox
     End Class
 End Namespace

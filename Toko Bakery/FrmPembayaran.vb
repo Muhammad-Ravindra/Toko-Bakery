@@ -1,9 +1,16 @@
 Imports System
+Imports System.Globalization
 Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
 
 Namespace TokoRotiVB
     Public Partial Class FrmPembayaran
+        ' Format rupiah tanpa desimal, sama seperti form Produk ("90.000").
+        Private Shared ReadOnly IdCulture As CultureInfo = CultureInfo.GetCultureInfo("id-ID")
+
+        ' Sisa tagihan pesanan yang sedang dipilih (untuk menentukan DP/LUNAS otomatis).
+        Private _sisaTerpilih As Decimal = 0D
+
         Public Sub New()
             InitializeComponent()
             UiHelpers.ConfigureGrid(dgvRiwayatBayar)
@@ -13,7 +20,39 @@ Namespace TokoRotiVB
             AddHandler btnBayar.Click, Sub(sender, e) SimpanPembayaran()
             AddHandler btnBersihkan.Click, Sub(sender, e) Bersihkan()
             AddHandler cmbPesanan.SelectedIndexChanged, Sub(sender, e) MuatRingkasan()
+            AddHandler numJumlahBayar.ValueChanged, Sub(sender, e) TentukanJenisOtomatis()
             AddHandler Me.Load, Sub(sender, e) MuatPesanan()
+        End Sub
+
+        Private Shared Function Rupiah(nilai As Decimal) As String
+            Return nilai.ToString("N0", IdCulture)
+        End Function
+
+        ' Jumlah = sisa tagihan -> LUNAS, kurang dari sisa -> DP.
+        Private Sub TentukanJenisOtomatis()
+            If _sisaTerpilih <= 0D Then Return
+            cmbJenisBayar.SelectedItem = If(numJumlahBayar.Value >= _sisaTerpilih, "LUNAS", "DP")
+        End Sub
+
+        Private Sub AturKolomRiwayat()
+            Dim judul As New Dictionary(Of String, String) From {
+                {"tgl_bayar", "Tanggal"}, {"jumlah", "Jumlah (Rp)"},
+                {"metode", "Metode"}, {"jenis", "Jenis"}
+            }
+            For Each col As DataGridViewColumn In dgvRiwayatBayar.Columns
+                Dim teks As String = Nothing
+                If judul.TryGetValue(col.DataPropertyName, teks) Then col.HeaderText = teks
+            Next
+            If dgvRiwayatBayar.Columns.Contains("jumlah") Then
+                With dgvRiwayatBayar.Columns("jumlah").DefaultCellStyle
+                    .FormatProvider = IdCulture
+                    .Format = "N0"
+                    .Alignment = DataGridViewContentAlignment.MiddleRight
+                End With
+            End If
+            If dgvRiwayatBayar.Columns.Contains("tgl_bayar") Then
+                dgvRiwayatBayar.Columns("tgl_bayar").DefaultCellStyle.Format = "dd/MM/yyyy"
+            End If
         End Sub
 
         Private Function IdPesananTerpilih() As Integer?
@@ -38,6 +77,7 @@ Namespace TokoRotiVB
         Private Sub MuatRingkasan()
             Dim id As Integer? = IdPesananTerpilih()
             If Not id.HasValue Then
+                _sisaTerpilih = 0D
                 txtPelanggan.Clear()
                 txtTotal.Clear()
                 txtSudahBayar.Clear()
@@ -53,12 +93,15 @@ Namespace TokoRotiVB
                 Dim total As Decimal = Convert.ToDecimal(row("total"))
                 Dim sisa As Decimal = Convert.ToDecimal(row("sisa"))
                 Dim sudahBayar As Decimal = Convert.ToDecimal(Database.Scalar("SELECT COALESCE(SUM(jumlah), 0) FROM pembayaran WHERE id_pesanan=@id", New MySqlParameter("@id", id.Value)))
-                txtTotal.Text = total.ToString("N2")
-                txtSudahBayar.Text = sudahBayar.ToString("N2")
-                txtSisaTagihan.Text = sisa.ToString("N2")
-                numJumlahBayar.Maximum = Math.Max(sisa, 0.01D)
+                txtTotal.Text = Rupiah(total)
+                txtSudahBayar.Text = Rupiah(sudahBayar)
+                txtSisaTagihan.Text = Rupiah(sisa)
+                _sisaTerpilih = sisa
+                numJumlahBayar.Maximum = Math.Max(sisa, 1D)
                 If numJumlahBayar.Value > numJumlahBayar.Maximum Then numJumlahBayar.Value = numJumlahBayar.Maximum
+                TentukanJenisOtomatis()
                 dgvRiwayatBayar.DataSource = Database.Query("SELECT id_bayar, tgl_bayar, jumlah, metode, jenis FROM pembayaran WHERE id_pesanan=@id ORDER BY tgl_bayar DESC, id_bayar DESC", New MySqlParameter("@id", id.Value))
+                AturKolomRiwayat()
             Catch ex As Exception
                 UiHelpers.ShowError(ex, "Gagal memuat ringkasan pembayaran")
             End Try
@@ -132,9 +175,10 @@ Namespace TokoRotiVB
 
         Private Sub Bersihkan()
             dtpTanggalBayar.Value = Date.Today
-            numJumlahBayar.Value = Math.Min(0.01D, numJumlahBayar.Maximum)
+            numJumlahBayar.Value = 0D
             cmbMetode.Text = "transfer"
             cmbJenisBayar.SelectedItem = "DP"
+            numJumlahBayar.Focus()
         End Sub
 
         Private Sub FrmPembayaran_Load(sender As Object, e As EventArgs) Handles MyBase.Load

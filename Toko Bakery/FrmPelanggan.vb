@@ -1,4 +1,5 @@
 Imports System
+Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
 
@@ -8,6 +9,8 @@ Namespace TokoRotiVB
         ' Pengganti txtIdPelanggan: menyimpan id pelanggan yang sedang dipilih.
         ' Nothing = belum ada baris yang dipilih.
         Private _selectedId As Integer? = Nothing
+
+        Private Shared ReadOnly PolaEmail As New Regex("^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
         Public Sub New()
             InitializeComponent()
@@ -19,6 +22,7 @@ Namespace TokoRotiVB
             AddHandler btnBersihkan.Click, Sub(sender, e) Bersihkan()
             AddHandler dgvPelanggan.CellClick, Sub(sender, e) PilihBaris()
             AddHandler Me.Load, Sub(sender, e) MuatData()
+            AddHandler txtNoHp.KeyPress, AddressOf NoHp_KeyPress
 
             UpdateButtonState()
         End Sub
@@ -37,27 +41,67 @@ Namespace TokoRotiVB
             btnHapus.Enabled = isSelected AndAlso AppSession.IsOwner
         End Sub
 
+        ' No. HP hanya boleh angka, spasi, tanda '-' dan '+'.
+        Private Sub NoHp_KeyPress(sender As Object, e As KeyPressEventArgs)
+            If Char.IsControl(e.KeyChar) OrElse Char.IsDigit(e.KeyChar) OrElse e.KeyChar = "-"c OrElse e.KeyChar = "+"c OrElse e.KeyChar = " "c Then Return
+            e.Handled = True
+        End Sub
+
         Private Sub MuatData()
             Try
-                dgvPelanggan.DataSource = Database.Query("SELECT id_pelanggan, nama, tipe, termin_hari, alamat_pengiriman FROM pelanggan WHERE is_deleted = 0 ORDER BY id_pelanggan DESC")
+                dgvPelanggan.DataSource = Database.Query("SELECT id_pelanggan, nama, tipe, termin_hari, alamat_pengiriman, email, no_hp FROM pelanggan WHERE is_deleted = 0 ORDER BY id_pelanggan DESC")
                 dgvPelanggan.ClearSelection()
             Catch ex As Exception
                 UiHelpers.ShowError(ex, "Gagal memuat data pelanggan")
             End Try
         End Sub
 
-        Private Sub Tambah()
+        ' Mengembalikan False (dan menampilkan pesan) jika isian tidak valid.
+        Private Function ValidasiInput() As Boolean
             If String.IsNullOrWhiteSpace(txtNama.Text) Then
                 MessageBox.Show("Nama pelanggan wajib diisi.")
-                Return
+                Return False
             End If
+            Dim email As String = txtEmail.Text.Trim()
+            If email.Length > 0 AndAlso Not PolaEmail.IsMatch(email) Then
+                MessageBox.Show("Format email tidak valid. Contoh: nama@gmail.com")
+                txtEmail.Focus()
+                Return False
+            End If
+            Dim hp As String = txtNoHp.Text.Trim()
+            If hp.Length > 0 Then
+                Dim jumlahAngka As Integer = Regex.Replace(hp, "\D", "").Length
+                If jumlahAngka < 8 OrElse jumlahAngka > 15 Then
+                    MessageBox.Show("No. HP harus berisi 8 sampai 15 angka.")
+                    txtNoHp.Focus()
+                    Return False
+                End If
+            End If
+            Return True
+        End Function
+
+        ' Teks kosong disimpan sebagai NULL.
+        Private Shared Function NilaiAtauNull(teks As String) As Object
+            Return If(String.IsNullOrWhiteSpace(teks), CType(DBNull.Value, Object), teks.Trim())
+        End Function
+
+        ' Parameter yang sama untuk INSERT dan UPDATE.
+        Private Function ParameterPelanggan() As List(Of MySqlParameter)
+            Return New List(Of MySqlParameter) From {
+                New MySqlParameter("@nama", txtNama.Text.Trim()),
+                New MySqlParameter("@tipe", If(cmbTipe.SelectedItem Is Nothing, "individu", Convert.ToString(cmbTipe.SelectedItem))),
+                New MySqlParameter("@termin", Decimal.ToInt32(numTermin.Value)),
+                New MySqlParameter("@alamat", NilaiAtauNull(txtAlamat.Text)),
+                New MySqlParameter("@email", NilaiAtauNull(txtEmail.Text)),
+                New MySqlParameter("@hp", NilaiAtauNull(txtNoHp.Text))
+            }
+        End Function
+
+        Private Sub Tambah()
+            If Not ValidasiInput() Then Return
             Try
-                Database.Execute("INSERT INTO pelanggan (nama, tipe, termin_hari, alamat_pengiriman) VALUES (@nama, @tipe, @termin, @alamat)",
-                    New MySqlParameter("@nama", txtNama.Text.Trim()),
-                    New MySqlParameter("@tipe", If(cmbTipe.SelectedItem Is Nothing, "individu", Convert.ToString(cmbTipe.SelectedItem))),
-                    New MySqlParameter("@termin", Decimal.ToInt32(numTermin.Value)),
-                    New MySqlParameter("@alamat", If(String.IsNullOrWhiteSpace(txtAlamat.Text), CType(DBNull.Value, Object), txtAlamat.Text.Trim()))
-                    )
+                Database.Execute("INSERT INTO pelanggan (nama, tipe, termin_hari, alamat_pengiriman, email, no_hp) VALUES (@nama, @tipe, @termin, @alamat, @email, @hp)",
+                                 ParameterPelanggan().ToArray())
                 MuatData()
                 Bersihkan()
                 MessageBox.Show("Data pelanggan berhasil ditambahkan.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -72,18 +116,12 @@ Namespace TokoRotiVB
                 MessageBox.Show("Pilih pelanggan yang ingin diubah.")
                 Return
             End If
-            If String.IsNullOrWhiteSpace(txtNama.Text) Then
-                MessageBox.Show("Nama pelanggan wajib diisi.")
-                Return
-            End If
+            If Not ValidasiInput() Then Return
             Try
-                Database.Execute("UPDATE pelanggan SET nama=@nama, tipe=@tipe, termin_hari=@termin, alamat_pengiriman=@alamat WHERE id_pelanggan=@id",
-                    New MySqlParameter("@nama", txtNama.Text.Trim()),
-                    New MySqlParameter("@tipe", If(cmbTipe.SelectedItem Is Nothing, "individu", Convert.ToString(cmbTipe.SelectedItem))),
-                    New MySqlParameter("@termin", Decimal.ToInt32(numTermin.Value)),
-                    New MySqlParameter("@alamat", If(String.IsNullOrWhiteSpace(txtAlamat.Text), CType(DBNull.Value, Object), txtAlamat.Text.Trim())),
-                    New MySqlParameter("@id", _selectedId.Value)
-                    )
+                Dim parameter = ParameterPelanggan()
+                parameter.Add(New MySqlParameter("@id", _selectedId.Value))
+                Database.Execute("UPDATE pelanggan SET nama=@nama, tipe=@tipe, termin_hari=@termin, alamat_pengiriman=@alamat, email=@email, no_hp=@hp WHERE id_pelanggan=@id",
+                                 parameter.ToArray())
                 MuatData()
                 Bersihkan()
             Catch ex As Exception
@@ -107,6 +145,11 @@ Namespace TokoRotiVB
             End Try
         End Sub
 
+        Private Shared Function TeksSel(row As DataGridViewRow, kolom As String) As String
+            Dim v As Object = row.Cells(kolom).Value
+            Return If(v Is Nothing OrElse v Is DBNull.Value, String.Empty, Convert.ToString(v))
+        End Function
+
         Private Sub PilihBaris()
             If dgvPelanggan.CurrentRow Is Nothing Then Return
             Dim row As DataGridViewRow = dgvPelanggan.CurrentRow
@@ -115,9 +158,11 @@ Namespace TokoRotiVB
             If Not Integer.TryParse(Convert.ToString(row.Cells("id_pelanggan").Value), id) Then Return
             _selectedId = id
 
-            txtNama.Text = Convert.ToString(row.Cells("nama").Value)
-            cmbTipe.SelectedItem = Convert.ToString(row.Cells("tipe").Value)
-            txtAlamat.Text = If(row.Cells("alamat_pengiriman").Value Is DBNull.Value, String.Empty, Convert.ToString(row.Cells("alamat_pengiriman").Value))
+            txtNama.Text = TeksSel(row, "nama")
+            cmbTipe.SelectedItem = TeksSel(row, "tipe")
+            txtAlamat.Text = TeksSel(row, "alamat_pengiriman")
+            txtEmail.Text = TeksSel(row, "email")
+            txtNoHp.Text = TeksSel(row, "no_hp")
 
             Dim termin As Decimal
             Decimal.TryParse(Convert.ToString(row.Cells("termin_hari").Value), termin)
@@ -130,6 +175,8 @@ Namespace TokoRotiVB
             _selectedId = Nothing
             txtNama.Clear()
             txtAlamat.Clear()
+            txtEmail.Clear()
+            txtNoHp.Clear()
             numTermin.Value = 0
             If cmbTipe.Items.Count > 0 Then cmbTipe.SelectedIndex = 0
             dgvPelanggan.ClearSelection()

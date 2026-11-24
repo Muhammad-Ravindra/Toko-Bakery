@@ -96,7 +96,13 @@ Namespace TokoRotiVB
 
                 ' Force money columns to N0 (no decimals) under id-ID separators,
                 ' so they can't render as "8.000.00" via a stray N2 or a mixed culture.
+                Dim judul As New Dictionary(Of String, String) From {
+                    {"nama_produk", "Nama Produk"}, {"kategori", "Kategori"}, {"harga_jual", "Harga Jual (Rp)"},
+                    {"hpp", "HPP (Rp)"}, {"masa_simpan_jam", "Masa Simpan (jam)"}
+                }
                 For Each col As DataGridViewColumn In dgvProduk.Columns
+                    Dim teks As String = Nothing
+                    If judul.TryGetValue(col.DataPropertyName, teks) Then col.HeaderText = teks
                     If String.Equals(col.DataPropertyName, "harga_jual", StringComparison.OrdinalIgnoreCase) OrElse
                        String.Equals(col.DataPropertyName, "hpp", StringComparison.OrdinalIgnoreCase) Then
                         col.DefaultCellStyle.FormatProvider = IdCulture
@@ -110,11 +116,22 @@ Namespace TokoRotiVB
             End Try
         End Sub
 
-        Private Sub Tambah()
-            If String.IsNullOrWhiteSpace(txtNamaProduk.Text) OrElse String.IsNullOrWhiteSpace(cmbKategori.Text) Then
-                MessageBox.Show("Nama produk dan kategori wajib diisi.")
-                Return
+        Private Function ValidasiInput() As Boolean
+            If String.IsNullOrWhiteSpace(txtNamaProduk.Text) Then
+                MessageBox.Show("Nama produk wajib diisi.")
+                txtNamaProduk.Focus()
+                Return False
             End If
+            If cmbKategori.SelectedIndex < 0 Then
+                MessageBox.Show("Pilih kategori: Kue, Roti, Jajan Basah, atau Jajan Kering.")
+                cmbKategori.Focus()
+                Return False
+            End If
+            Return True
+        End Function
+
+        Private Sub Tambah()
+            If Not ValidasiInput() Then Return
 
             Dim hargaJual As Decimal = GetMoneyValue(numHargaJual)
             Dim hpp As Decimal = GetMoneyValue(numHpp)
@@ -140,10 +157,7 @@ Namespace TokoRotiVB
                 MessageBox.Show("Pilih produk yang ingin diubah.")
                 Return
             End If
-            If String.IsNullOrWhiteSpace(txtNamaProduk.Text) OrElse String.IsNullOrWhiteSpace(cmbKategori.Text) Then
-                MessageBox.Show("Nama produk dan kategori wajib diisi.")
-                Return
-            End If
+            If Not ValidasiInput() Then Return
 
             Dim hargaJual As Decimal = GetMoneyValue(numHargaJual)
             Dim hpp As Decimal = GetMoneyValue(numHpp)
@@ -188,7 +202,7 @@ Namespace TokoRotiVB
             _selectedId = id
 
             txtNamaProduk.Text = Convert.ToString(row.Cells("nama_produk").Value)
-            cmbKategori.Text = Convert.ToString(row.Cells("kategori").Value)
+            cmbKategori.SelectedItem = Convert.ToString(row.Cells("kategori").Value)
 
             ' Read decimals straight from the cell — no string round-trip.
             Dim harga As Decimal = 0D, hpp As Decimal = 0D, masa As Decimal = 0D
@@ -214,7 +228,6 @@ Namespace TokoRotiVB
             _selectedId = Nothing
             txtNamaProduk.Clear()
             cmbKategori.SelectedIndex = -1
-            cmbKategori.Text = String.Empty
 
             numHargaJual.Text = "0"
             numHpp.Text = "0"
